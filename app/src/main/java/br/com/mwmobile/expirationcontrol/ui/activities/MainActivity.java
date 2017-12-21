@@ -88,7 +88,11 @@ public class MainActivity extends LifecycleAppCompatActivity
         //Initialize the AdMob
         MobileAds.initialize(this, getString(R.string.admob_key));
         AdView mAdView = findViewById(R.id.adView);
+
+        //TODO: TEST ONLY
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("42035966B2CB558C885117E9202036B4").build();
+        //-------------------
+
         mAdView.loadAd(adRequest);
 
         final CollapsingToolbarLayout collapsingToolbarLayout =  findViewById(R.id.collapsingToolbar);

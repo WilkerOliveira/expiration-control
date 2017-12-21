@@ -94,9 +94,11 @@ dependencies {
     //AdMOB
     compile 'com.google.android.gms:play-services-ads:' + rootProject.androidGSMVersion
     compile 'com.google.android.gms:play-services:' + rootProject.androidGSMVersion
-    //compile 'com.google.android.gms:play-services-maps:' + rootProject.androidGSMVersion
     compile 'com.google.firebase:firebase-core:' + rootProject.androidGSMVersion
     compile 'com.google.firebase:firebase-messaging:' + rootProject.androidGSMVersion
+
+    //MULTIDEX
+    compile 'com.android.support:multidex:1.0.2'
 
 
 
