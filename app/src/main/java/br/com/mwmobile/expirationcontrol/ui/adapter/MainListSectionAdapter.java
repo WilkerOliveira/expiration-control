@@ -1,0 +1,97 @@
+package br.com.mwmobile.expirationcontrol.ui.adapter;
+
+import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.ArrayList;
+
+import br.com.mwmobile.expirationcontrol.R;
+import br.com.mwmobile.expirationcontrol.ui.adapter.util.RecyclerViewType;
+import br.com.mwmobile.expirationcontrol.ui.adapter.util.SectionModel;
+import br.com.mwmobile.expirationcontrol.ui.adapter.viewModel.SectionViewHolder;
+import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
+import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
+
+import static br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration.SHOW_FIRST_DIVIDER;
+import static br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration.SHOW_LAST_DIVIDER;
+
+/**
+ * Main List Section Adapter
+ *
+ * @author Wilker Oliveira - wilker.oliveira@gmail.com
+ * @version 1.0.0
+ * @since 25/11/2017
+ */
+public class MainListSectionAdapter extends RecyclerView.Adapter<SectionViewHolder> {
+
+    private final OnProductListener listener;
+    private Context context;
+    private RecyclerViewType recyclerViewType;
+    private ArrayList<SectionModel> sectionModelArrayList;
+
+    /**
+     * Constructor
+     *
+     * @param context          Activity Context
+     * @param recyclerViewType Type of RecyclerView
+     * @param sectionModels    Sections list
+     * @param listener         Event listener
+     */
+    public MainListSectionAdapter(Context context, RecyclerViewType recyclerViewType, ArrayList<SectionModel> sectionModels, OnProductListener listener) {
+        this.context = context;
+        this.recyclerViewType = recyclerViewType;
+        this.sectionModelArrayList = sectionModels;
+        this.listener = listener;
+    }
+
+    @Override
+    public SectionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.section_custom_row_layout, parent, false);
+        return new SectionViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(SectionViewHolder holder, int position) {
+        final SectionModel sectionModel = sectionModelArrayList.get(position);
+
+        holder.sectionLabel.setText(sectionModel.getSectionLabel());
+        holder.itemDecoration = new DividerItemDecoration(context, null, SHOW_FIRST_DIVIDER, SHOW_LAST_DIVIDER);
+        holder.itemRecyclerView.removeItemDecoration(holder.itemDecoration);
+        holder.itemRecyclerView.addItemDecoration(holder.itemDecoration);
+
+        //recycler view for items
+        holder.itemRecyclerView.setHasFixedSize(true);
+        holder.itemRecyclerView.setNestedScrollingEnabled(false);
+
+        /* set layout manager on basis of recyclerview enum type */
+        switch (recyclerViewType) {
+            case LINEAR_VERTICAL:
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                holder.itemRecyclerView.setLayoutManager(linearLayoutManager);
+                break;
+            case LINEAR_HORIZONTAL:
+                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                holder.itemRecyclerView.setLayoutManager(linearLayoutManager1);
+                break;
+            case GRID:
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
+                holder.itemRecyclerView.setLayoutManager(gridLayoutManager);
+                break;
+        }
+
+        MainListAdapter adapter = new MainListAdapter(sectionModel.getProductList(), position, listener, context);
+        holder.itemRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public int getItemCount() {
+        return sectionModelArrayList.size();
+    }
+
+
+}

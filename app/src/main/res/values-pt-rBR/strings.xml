@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Controle de Vencimento</string>
+
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Fechar navigation drawer</string>
+
+    <string name="supplier">Fornecedor</string>
+    <string name="supplier_hint">Fornecedor (*)</string>
+    <string name="product">Produto</string>
+    <string name="product_hint">Produto (*)</string>
+    <string name="expiration">Vencimento</string>
+    <string name="expiration_hint">Vencimento (*)</string>
+    <string name="fake_date">00/00/0000</string>
+    <string name="quantity">Quantidade</string>
+    <string name="no_products">Produtos não encontrados!</string>
+    <string name="loading">Carregando…</string>
+    <string name="suppliers">Fornecedores</string>
+    <string name="products">Produtos</string>
+    <string name="settings">Configurações</string>
+    <string name="next_expirations">Próximos</string>
+    <string name="msg_supplier_name_exist">Já existe um Fonecedor com esse nome!</string>
+    <string name="msg_invalid_expiration_date">Data de vencimento inválida!</string>
+    <string name="save_error">Desculpte, não foi possível salvar esse registro!</string>
+    <string name="permission_not_granted">Permissão não concedida.</string>
+
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancelar</string>
+    <string name="no_button">NÃO</string>
+    <string name="yes_button">SIM</string>
+
+    <string name="error_load_supplier">Desculpe, não foi possível carregar o Fornecedor!</string>
+    <string name="default_date">00/00/0000</string>
+
+    <string name="error_load_products">Não foi possível carregar os Produtos!</string>
+    <string name="save">SALVAR</string>
+    <string name="clear">LIMPAR</string>
+    <string name="msg_required_fields">Campos obrigatórios não informados!</string>
+    <string name="supplier_save_success">Fornecedor salvo!</string>
+    <string name="registers_not_found">Registros não encontrados!</string>
+    <string name="delete">Excluir</string>
+    <string name="suppliers_not_found">Fornecedores não encontrados!</string>
+    <string name="error_load_product">Desculpe, não foi possível carregar o produto!</string>
+    <string name="product_save_success">Produto salvo!</string>
+    <string name="show_all">Mostrar Todos</string>
+    <string name="msg_confirm_delete_product">Deseja realmente excluir esses produtos?</string>
+    <string name="msg_confirm_delete_supplier">Deseja realmente excluir esses fornecedores?</string>
+    <string name="msg_delete_success">Itens excluídos com sucesso!</string>
+
+    <string name="no_products_registered">Nenhum produto para listar!</string>
+
+    <string name="exit_confirm_msg">Por favor click VOLTAR novamente para sair</string>
+
+    <string name="title_set_expiration_days_alert">Dias antes do vencimento do produto</string>
+    <string name="summary_expiration_days">Por favor informe os dias, antes do vencimento do produto, para ser notificado!</string>
+    <string name="expiration_days_alert">expiration_days_alert</string>
+    <string name="notification_alert">notification_alert</string>
+    <string name="summary_expiration_notification_alert">Habilitar ou Desabilitar a notificação!</string>
+    <string name="title_expiration_notification_alert">Notificação</string>
+    <string name="default_expiration_days">10</string>
+    <string name="barcode">Código de Barras</string>
+    <string name="filter">Filtro</string>
+    <string name="all">Todos</string>
+    <string name="expired">Vencidos</string>
+    <string name="valid_period">Na Validade</string>
+    <string name="add_products">Adicionar novos Produtos</string>
+    <string name="searching">Procurando…</string>
+    <string name="period_days_alert">period_days_alert</string>
+    <string name="summary_period_days_alert">Por favor informe o intervalo (em dias) para monitorar os vencimentos dos produtos!</string>
+    <string name="default_period_days_alert">1</string>
+    <string name="title_period_days_alert">Intervalo para monitoração</string>
+    <string name="content_text_notification">Venha ver. Existem produtos que estão vencendo!</string>
+    <string name="content_title_products_expiring">Produtos vencendo</string>
+    <string name="summary_products">Um resumo dos produtos serão listados aqui</string>
+</resources>

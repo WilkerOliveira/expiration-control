@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Expiration Control</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="supplier">Supplier</string>
+    <string name="supplier_hint">Supplier (*)</string>
+    <string name="product">Product</string>
+    <string name="product_hint">Product (*)</string>
+    <string name="expiration">Expiration</string>
+    <string name="expiration_hint">Expiration (*)</string>
+    <string name="fake_date">00/00/0000</string>
+    <string name="quantity">Quantity</string>
+    <string name="no_products">Products not found!</string>
+    <string name="loading">Loading…</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="products">Products</string>
+    <string name="settings">Settings</string>
+    <string name="next_expirations">Upcoming</string>
+    <string name="msg_supplier_name_exist">Already exist a Supplier with this name!</string>
+    <string name="msg_invalid_expiration_date">Expiration date is invalid!</string>
+    <string name="save_error">Sorry, can\'t save this register!</string>
+    <string name="permission_not_granted">Permission not granted.</string>
+
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="no_button">NO</string>
+    <string name="yes_button">YES</string>
+
+    <string name="error_load_supplier">Sorry, can\'t load the Supplier!</string>
+    <string name="default_date">00/00/0000</string>
+
+    <string name="error_load_products">Can\'t load products!</string>
+    <string name="save">SAVE</string>
+    <string name="clear">CLEAR</string>
+    <string name="msg_required_fields">Required fields not filled!</string>
+    <string name="supplier_save_success">Supplier save!</string>
+    <string name="registers_not_found">Registers not found!</string>
+    <string name="delete">Delete</string>
+    <string name="suppliers_not_found">Suppliers not found!</string>
+    <string name="error_load_product">Sorry, can\'t load product!</string>
+    <string name="product_save_success">Product saved!</string>
+    <string name="show_all">Show All</string>
+    <string name="msg_confirm_delete_product">Do you really want delete these products?</string>
+    <string name="msg_confirm_delete_supplier">Do you really want delete these suppliers?</string>
+    <string name="msg_delete_success">Deleted items successfully!</string>
+
+    <string name="no_products_registered">No products to list!</string>
+
+    <string name="exit_confirm_msg">Please click BACK again to exit</string>
+
+    <string name="title_set_expiration_days_alert">Days before Product Expiration</string>
+    <string name="summary_expiration_days">Please set the days, before the product expiration, to be notified!</string>
+    <string name="expiration_days_alert">expiration_days_alert</string>
+    <string name="notification_alert">notification_alert</string>
+    <string name="summary_expiration_notification_alert">Enable or Disable the notification!</string>
+    <string name="title_expiration_notification_alert">Notification</string>
+    <string name="default_expiration_days">10</string>
+    <string name="barcode">Barcode</string>
+    <string name="filter">Filter</string>
+    <string name="all">All</string>
+    <string name="expired">Expired</string>
+    <string name="valid_period">Valid</string>
+    <string name="add_products">Add new products</string>
+    <string name="searching">Searching…</string>
+    <string name="period_days_alert">period_days_alert</string>
+    <string name="summary_period_days_alert">Please set the interval (in days) to monitoring the product expiration!</string>
+    <string name="default_period_days_alert">1</string>
+    <string name="title_period_days_alert">Interval to monitoring</string>
+    <string name="content_text_notification">Come see. There are some products expiring!</string>
+    <string name="content_title_products_expiring">Products expiring</string>
+    <string name="summary_products">A summary of your products will be list here</string>
+
+
+    <string name="admob_key">ca-app-pub-9681983966112415~4520012405</string>
+    <string name="adUnitId">ca-app-pub-9681983966112415/4460550078</string>
+</resources>
