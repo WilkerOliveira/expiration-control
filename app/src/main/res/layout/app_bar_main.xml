@@ -35,47 +35,49 @@
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
                     android:id="@+id/arc_progress_expirated"
-                    android:layout_width="105dp"
-                    android:layout_height="110dp"
+                    android:layout_width="@dimen/arc_progress_width"
+                    android:layout_height="@dimen/arc_progress_height"
                     android:layout_marginBottom="8dp"
-                    android:contentDescription=""
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="@dimen/arc_progress_margin_end"
+                    android:layout_marginStart="@dimen/arc_progress_margin_start"
                     android:layout_marginTop="32dp"
-                    app:arc_text_color="@color/expirated"
-                    custom:arc_suffix_text=" "
+                    android:contentDescription=""
                     android:scaleType="centerCrop"
+                    app:arc_bottom_text="@string/expired"
                     app:arc_finished_color="@color/expirated"
+                    app:arc_text_color="@color/expirated"
                     custom:arc_progress="0"
-                    app:arc_bottom_text="@string/expired" />
+                    custom:arc_suffix_text=" " />
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
                     android:id="@+id/arc_progress_warning"
-                    android:layout_width="105dp"
-                    custom:arc_suffix_text=" "
-                    android:layout_height="110dp"
-                    app:arc_text_color="@color/warning_expiration"
+                    android:layout_width="@dimen/arc_progress_width"
+                    android:layout_height="@dimen/arc_progress_height"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="@dimen/arc_progress_margin_end"
+                    android:layout_marginStart="@dimen/arc_progress_margin_start"
                     android:layout_marginTop="32dp"
                     android:scaleType="centerCrop"
                     app:arc_finished_color="@color/warning_expiration"
+                    app:arc_text_color="@color/warning_expiration"
                     custom:arc_bottom_text="@string/next_expirations"
-                    custom:arc_progress="0" />
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text=" " />
 
                 <com.github.lzyzsd.circleprogress.ArcProgress
                     android:id="@+id/arc_progress_normal"
-                    android:layout_width="105dp"
-                    app:arc_text_color="@color/normal_expiration"
-                    android:layout_height="110dp"
+                    android:layout_width="@dimen/arc_progress_width"
+                    android:layout_height="@dimen/arc_progress_height"
                     android:layout_marginBottom="8dp"
-                    custom:arc_suffix_text=" "
-                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="@dimen/arc_progress_margin_end"
+                    android:layout_marginStart="@dimen/arc_progress_margin_start"
                     android:layout_marginTop="32dp"
                     android:scaleType="centerCrop"
                     app:arc_finished_color="@color/normal_expiration"
+                    app:arc_text_color="@color/normal_expiration"
                     custom:arc_bottom_text="@string/valid_period"
-                    custom:arc_progress="0" />
+                    custom:arc_progress="0"
+                    custom:arc_suffix_text=" " />
 
             </LinearLayout>
 
@@ -92,10 +94,10 @@
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="match_parent"
-        android:layout_gravity="bottom"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/5224354917"
         ads:layout_constraintBottom_toBottomOf="parent"

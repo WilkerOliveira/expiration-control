@@ -71,4 +71,7 @@
     <string name="content_text_notification">Venha ver. Existem produtos que estão vencendo!</string>
     <string name="content_title_products_expiring">Produtos vencendo</string>
     <string name="summary_products">Um resumo dos produtos serão listados aqui</string>
+
+    <string name="admob_key">YOUR_KEY</string>
+    <string name="adUnitId">YOUR_KEY</string>
 </resources>

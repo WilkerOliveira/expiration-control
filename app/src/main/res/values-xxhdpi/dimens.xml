@@ -1,0 +1,10 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="check_filter_margin_start">32dp</dimen>
+    <dimen name="check_filter_margin_end">32dp</dimen>
+
+    <dimen name="arc_progress_margin_start">16dp</dimen>
+    <dimen name="arc_progress_margin_end">16dp</dimen>
+
+</resources>
