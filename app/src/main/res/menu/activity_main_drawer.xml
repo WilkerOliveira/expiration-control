@@ -23,4 +23,13 @@
         </menu>
     </item>
 
+    <item android:title="@string/privacy">
+        <menu>
+            <item
+                android:id="@+id/nav_privacy_policy"
+                android:icon="@android:drawable/ic_lock_idle_lock"
+                android:title="@string/privacy_policy" />
+        </menu>
+    </item>
+
 </menu>

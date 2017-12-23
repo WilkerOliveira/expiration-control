@@ -74,4 +74,29 @@
 
     <string name="admob_key">YOUR_KEY</string>
     <string name="adUnitId">YOUR_KEY</string>
+
+    <string name="privacy">Privacidade</string>
+    <string name="privacy_policy">Política de Privacidade</string>
+
+    <string name="privacy_policity_text"><![CDATA[
+                <html><head>
+                "<title></title>
+                "</head>
+                "<body>
+                "<h1 style=\"text-align: center;\">
+                "<u>Pol&iacute;tica de Privacidade</u></h1>
+                "<div>
+                "N&oacute;s estamos comprometidos com a prote&ccedil;&atilde;o da sua privacidade. Por esse motivo, n&atilde;o coletamos nenhuma informa&ccedil;&atilde;o pessoal ou de uso deste aplicativo.</div>
+                "<h3>
+                "Uso da C&acirc;mera</h3>
+                "<div>
+                "O uso da c&acirc;mera atrav&eacute;s do aplicativo, est&aacute; relacionada &uacute;nica e exclusivamente para capturar o c&oacute;digo de barras dos produtos.</div>
+                "<div>
+                "Nenhuma outra informa&ccedil;&atilde;o &eacute; utilizada atrav&eacute;s do seu uso.</div>
+                "<h3>
+                "Do armazenamento das informa&ccedil;&otilde;es</h3>
+                "<div>
+                "Todos os dados cadastrados atrav&eacute;s do aplicativo ficaram armazenados em sua totalidade no pr&oacute;prio smartphone, e s&atilde;o de total responsabilidade do seus utilizadores.</div>
+                "</body>
+                "</html>"]]></string>
 </resources>

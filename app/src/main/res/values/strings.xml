@@ -74,4 +74,28 @@
 
     <string name="admob_key">YOUR_KEY</string>
     <string name="adUnitId">YOUR_KEY</string>
+
+    <string name="privacy">Privacy</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policity_text"><![CDATA[
+                <html><head>
+                "<title></title>
+                "</head>
+                "<body>                
+                "<h1 style=\"text-align: center;\">
+                "<u>Privacy Policy</u></h1>
+                "<div>
+                "We are committed to protecting your privacy. For this reason, we do not collect any personal information or this application.</div>
+                "<h3>
+                "Using the Camera</h3>
+                "<div>
+                "The use of the camera through the application, is related solely and exclusively to capture the bar code of the products.</div>
+                "<div>
+                "No other information is used through its use.</div>
+                "<h3>
+                "Storing information</h3>
+                "<div>
+                "All data registered through the application has been stored in its entirety on the smartphone itself, and is entirely the responsibility of its users.</div>
+                "</body>
+                "</html>"]]></string>
 </resources>

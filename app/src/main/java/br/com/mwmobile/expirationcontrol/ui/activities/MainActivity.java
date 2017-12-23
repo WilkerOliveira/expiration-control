@@ -88,14 +88,10 @@ public class MainActivity extends LifecycleAppCompatActivity
         //Initialize the AdMob
         MobileAds.initialize(this, getString(R.string.admob_key));
         AdView mAdView = findViewById(R.id.adView);
-
-        //TODO: TEST ONLY
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("42035966B2CB558C885117E9202036B4").build();
-        //-------------------
-
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        final CollapsingToolbarLayout collapsingToolbarLayout =  findViewById(R.id.collapsingToolbar);
+        final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
         collapsingToolbarLayout.setTitle(" ");
         AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -110,7 +106,7 @@ public class MainActivity extends LifecycleAppCompatActivity
                 if (scrollRange + verticalOffset == 0) {
                     collapsingToolbarLayout.setTitle(getString(R.string.app_name));
                     isShow = true;
-                } else if(isShow) {
+                } else if (isShow) {
                     collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
                     isShow = false;
                 }
@@ -204,8 +200,10 @@ public class MainActivity extends LifecycleAppCompatActivity
         } else if (id == R.id.nav_notifications) {
             settingsEnable = true;
             startActivity(new Intent(this, SettingsActivity.class));
-        }
 
+        } else if (id == R.id.nav_privacy_policy) {
+            startActivity(new Intent(this, PrivacyPolictyActivity.class));
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
