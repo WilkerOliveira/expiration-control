@@ -1,7 +1,6 @@
 package br.com.mwmobile.expirationcontrol.ui.preferences;
 
 import android.app.job.JobScheduler;
-import android.content.ComponentName;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -82,11 +81,12 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             boolean notificationAlert = Boolean.parseBoolean(sharedPreferences.getAll().get(getString(R.string.notification_alert)).toString());
 
             JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-            ComponentName serviceName = new ComponentName(getPackageName(), NotificationJobService.class.getName());
 
             if (notificationAlert) {
 
                 int period = Integer.parseInt(sharedPreferences.getAll().get(getString(R.string.period_days_alert)).toString());
+
+                if (period <= 0) period = 1;
 
                 //NotificationJobService.createJob(period, serviceName, scheduler);
                 NotificationJobService.schedule(this, period);

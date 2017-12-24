@@ -7,7 +7,7 @@
         android:defaultValue="@string/default_expiration_days"
         android:inputType="number"
         android:maxLength="3"
-        android:digits="123456789"
+        android:digits="1234567890"
         android:title="@string/title_set_expiration_days_alert" />
 
     <SwitchPreference
@@ -22,7 +22,7 @@
         android:defaultValue="@string/default_period_days_alert"
         android:inputType="number"
         android:maxLength="3"
-        android:digits="123456789"
+        android:digits="1234567890"
         android:title="@string/title_period_days_alert" />
 
 </PreferenceScreen>
