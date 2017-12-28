@@ -10,3 +10,5 @@ App desenvolvido utilizando:
 - Notifications
 
 Arquitetura simples e escalável de fácil manutenção.
+
+Google Play: https://play.google.com/store/apps/details?id=br.com.mwmobile.expirationcontrol
