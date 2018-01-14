@@ -16,16 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.R;
-import br.com.mwmobile.expirationcontrol.repository.SupplierRepository;
-import br.com.mwmobile.expirationcontrol.ui.adapter.ListSupplierAdapter;
 import br.com.mwmobile.expirationcontrol.application.ExpirationControlApplication;
-import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
 import br.com.mwmobile.expirationcontrol.di.ViewModelFactory;
-import br.com.mwmobile.expirationcontrol.ui.dialog.AlertDialog;
-import br.com.mwmobile.expirationcontrol.ui.dialog.DialogType;
 import br.com.mwmobile.expirationcontrol.listener.OnSupplierListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
 import br.com.mwmobile.expirationcontrol.ui.activities.base.LifecycleAppCompatActivity;
+import br.com.mwmobile.expirationcontrol.ui.adapter.ListSupplierAdapter;
+import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
+import br.com.mwmobile.expirationcontrol.ui.dialog.AlertDialog;
+import br.com.mwmobile.expirationcontrol.ui.dialog.DialogType;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListSupplierViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -88,7 +87,7 @@ public class ListSupplierActivity extends LifecycleAppCompatActivity implements 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(null);
 
-        recyclerViewAdapter = new ListSupplierAdapter(new ArrayList<>(), this);
+        recyclerViewAdapter = new ListSupplierAdapter(new ArrayList<>(), this, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.removeItemDecoration(this.itemDecoration);
@@ -156,18 +155,18 @@ public class ListSupplierActivity extends LifecycleAppCompatActivity implements 
      */
     private void delete() {
         //confirm if the user really wants delete the product
-        final AlertDialog alerta = new AlertDialog();
+        final AlertDialog alert = new AlertDialog();
 
-        alerta.setAlertType(DialogType.YES_NO);
-        alerta.setMessage(getString(R.string.msg_confirm_delete_supplier));
+        alert.setAlertType(DialogType.YES_NO);
+        alert.setMessage(getString(R.string.msg_confirm_delete_supplier));
 
-        alerta.setFirstButtonEvent((dialogInterface, i) -> mDisposable.add(viewModel.delete(listToRemove)
+        alert.setFirstButtonEvent((dialogInterface, i) -> mDisposable.add(viewModel.delete(listToRemove)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onDeleteCompleted,
                         throwable -> showWarningOrErrorMessage(getSaveError(throwable), throwable))));
 
-        alerta.show(getSupportFragmentManager(), "dialogo");
+        alert.show(getSupportFragmentManager(), "dialog");
     }
 
     /**

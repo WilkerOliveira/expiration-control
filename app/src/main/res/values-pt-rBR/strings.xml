@@ -61,7 +61,7 @@
     <string name="filter">Filtro</string>
     <string name="all">Todos</string>
     <string name="expired">Vencidos</string>
-    <string name="valid_period">Na Validade</string>
+    <string name="valid_period">Válidos</string>
     <string name="add_products">Adicionar novos Produtos</string>
     <string name="searching">Procurando…</string>
     <string name="period_days_alert">period_days_alert</string>
@@ -78,7 +78,7 @@
     <string name="privacy">Privacidade</string>
     <string name="privacy_policy">Política de Privacidade</string>
 
-    <string name="privacy_policity_text"><![CDATA[
+    <string name="privacy_policy_text"><![CDATA[
                 <html><head>
                 "<title></title>
                 "</head>
@@ -99,4 +99,17 @@
                 "Todos os dados cadastrados atrav&eacute;s do aplicativo ficaram armazenados em sua totalidade no pr&oacute;prio smartphone, e s&atilde;o de total responsabilidade do seus utilizadores.</div>
                 "</body>
                 "</html>"]]></string>
+    <string name="product_value">Valor do Produto</string>
+    <string name="value">Vlr.</string>
+    <string name="qty">Qtd.</string>
+    <string name="amount">Valor Total</string>
+    <string name="amt">Vl. Tot.</string>
+    <string name="summary">Resumo</string>
+    <string name="tooltip_remove_helper">Pressione para selecionar!</string>
+    <string name="label_value">Vlr.:</string>
+    <string name="label_amt">Vl. Tot.:</string>
+    <string name="label_qty">Qtd.:</string>
+    <string name="label_products">Produtos:</string>
+    <string name="label_amount">Vl. Tot:</string>
+    <string name="tooltip_edit">Pressione para editar!</string>
 </resources>

@@ -36,7 +36,7 @@ public class Supplier {
     }
 
     /**
-     * Construtor
+     * Constructor
      *
      * @param id   Supplier ID
      * @param name Supplier Name

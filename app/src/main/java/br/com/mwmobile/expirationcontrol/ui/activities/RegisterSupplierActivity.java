@@ -16,16 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.R;
-import br.com.mwmobile.expirationcontrol.ui.adapter.ListProductAdapter;
 import br.com.mwmobile.expirationcontrol.application.ExpirationControlApplication;
-import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
 import br.com.mwmobile.expirationcontrol.di.ViewModelFactory;
 import br.com.mwmobile.expirationcontrol.listener.OnItemClickListener;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
-import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.ui.activities.base.LifecycleAppCompatActivity;
+import br.com.mwmobile.expirationcontrol.ui.adapter.ListProductAdapter;
+import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
+import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListProductViewModel;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.RegisterSupplierViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -133,7 +133,7 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
      */
     private void loadProducts() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        this.recyclerViewAdapter = new ListProductAdapter(new ArrayList<>(), 0, this,
+        this.recyclerViewAdapter = new ListProductAdapter(this, new ArrayList<>(), 0, this,
                 false,
                 Integer.parseInt(PreferencesManager.getExpirationDays(this)));
 
@@ -154,10 +154,10 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
                 recyclerViewAdapter.addItems(productList);
 
                 if (productList == null || productList.isEmpty()) {
-                    findViewById(R.id.lblProducts).setVisibility(View.GONE);
+                    findViewById(R.id.lblExpProducts).setVisibility(View.GONE);
                     findViewById(R.id.lblSummary).setVisibility(View.VISIBLE);
                 } else {
-                    findViewById(R.id.lblProducts).setVisibility(View.VISIBLE);
+                    findViewById(R.id.lblExpProducts).setVisibility(View.VISIBLE);
                     findViewById(R.id.lblSummary).setVisibility(View.GONE);
                 }
 
@@ -216,7 +216,7 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
             this.recyclerViewAdapter.addItems(new ArrayList<>());
         }
         findViewById(R.id.lblSummary).setVisibility(View.VISIBLE);
-        findViewById(R.id.lblProducts).setVisibility(View.INVISIBLE);
+        findViewById(R.id.lblExpProducts).setVisibility(View.INVISIBLE);
         if (getIntent() != null && getIntent().getExtras() != null) {
             getIntent().removeExtra("id");
         }
@@ -259,7 +259,11 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
 
     @Override
     public void onClick(Product product) {
+        Intent intent = new Intent(this, RegisterProductActivity.class);
 
+        intent.putExtra("id", product.getId());
+
+        startActivity(intent);
     }
 
     @Override

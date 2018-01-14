@@ -1,6 +1,7 @@
 package br.com.mwmobile.expirationcontrol.repository.converter;
 
 import android.arch.persistence.room.TypeConverter;
+import android.text.TextUtils;
 
 import java.math.BigDecimal;
 
@@ -15,7 +16,8 @@ public class BigDecimalConverter {
 
     @TypeConverter
     public static BigDecimal toBigDecimal(String value) {
-        return new BigDecimal(value);
+        if(value != null && !TextUtils.isEmpty(value)) return new BigDecimal(value);
+        return null;
     }
 
     @TypeConverter

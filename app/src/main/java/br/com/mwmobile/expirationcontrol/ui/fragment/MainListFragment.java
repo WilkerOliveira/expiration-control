@@ -99,25 +99,25 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        String expirationDadys = PreferencesManager.getExpirationDays(getActivity());
+        String expirationDays = PreferencesManager.getExpirationDays(getActivity());
 
         this.view.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
 
-        this.viewModel.getSupplierProduct(Integer.parseInt(expirationDadys), expirationStatus, supplierId, barCode).observe(this, list -> {
+        this.viewModel.getSupplierProduct(Integer.parseInt(expirationDays), expirationStatus, supplierId, barCode).observe(this, list -> {
 
             buildSections(list, updateTotal);
 
             if (list == null || list.isEmpty()) {
-                this.view.findViewById(R.id.txtNoRegsiters).setVisibility(View.VISIBLE);
+                this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.VISIBLE);
                 this.view.findViewById(R.id.imvEmptyList).setVisibility(View.VISIBLE);
             } else {
                 boolean existProducts = this.sectionModelArrayList != null && !this.sectionModelArrayList.isEmpty();
 
                 if (!existProducts) {
-                    this.view.findViewById(R.id.txtNoRegsiters).setVisibility(View.VISIBLE);
+                    this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.VISIBLE);
                     this.view.findViewById(R.id.imvEmptyList).setVisibility(View.VISIBLE);
                 } else {
-                    this.view.findViewById(R.id.txtNoRegsiters).setVisibility(View.GONE);
+                    this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.GONE);
                     this.view.findViewById(R.id.imvEmptyList).setVisibility(View.GONE);
                 }
             }
@@ -168,10 +168,10 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
     private void setTotalBar(int totalWarning, int totalExpired, int totalValid) {
         int total = totalWarning + totalExpired + totalValid;
 
-        ((ArcProgress) getActivity().findViewById(R.id.arc_progress_expirated)).setMax(total);
-        ((ArcProgress) getActivity().findViewById(R.id.arc_progress_expirated)).setProgress(totalExpired);
-        getActivity().findViewById(R.id.arc_progress_expirated).setOnClickListener(view ->
-                loadProducts(Collections.singletonList(ExpirationStatus.EXPIRATED), 0, null, false));
+        ((ArcProgress) getActivity().findViewById(R.id.arc_progress_expired)).setMax(total);
+        ((ArcProgress) getActivity().findViewById(R.id.arc_progress_expired)).setProgress(totalExpired);
+        getActivity().findViewById(R.id.arc_progress_expired).setOnClickListener(view ->
+                loadProducts(Collections.singletonList(ExpirationStatus.EXPIRED), 0, null, false));
 
 
         ((ArcProgress) getActivity().findViewById(R.id.arc_progress_warning)).setMax(total);

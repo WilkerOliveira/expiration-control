@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 
@@ -23,23 +24,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.R;
-import br.com.mwmobile.expirationcontrol.ui.adapter.ProductSectionAdapter;
-import br.com.mwmobile.expirationcontrol.ui.adapter.util.RecyclerViewType;
-import br.com.mwmobile.expirationcontrol.ui.adapter.util.SectionModel;
 import br.com.mwmobile.expirationcontrol.application.ExpirationControlApplication;
 import br.com.mwmobile.expirationcontrol.di.ViewModelFactory;
-import br.com.mwmobile.expirationcontrol.ui.dialog.AlertDialog;
-import br.com.mwmobile.expirationcontrol.ui.dialog.DialogType;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
 import br.com.mwmobile.expirationcontrol.repository.local.model.SupplierProduct;
-import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.ui.activities.base.LifecycleAppCompatActivity;
-import br.com.mwmobile.expirationcontrol.util.BarcodeScanner;
-import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
+import br.com.mwmobile.expirationcontrol.ui.adapter.ProductSectionAdapter;
+import br.com.mwmobile.expirationcontrol.ui.adapter.util.RecyclerViewType;
+import br.com.mwmobile.expirationcontrol.ui.adapter.util.SectionModel;
+import br.com.mwmobile.expirationcontrol.ui.dialog.AlertDialog;
+import br.com.mwmobile.expirationcontrol.ui.dialog.DialogType;
+import br.com.mwmobile.expirationcontrol.ui.model.SummaryVO;
+import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListProductViewModel;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListSupplierViewModel;
+import br.com.mwmobile.expirationcontrol.util.BarcodeScanner;
+import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
+import br.com.mwmobile.expirationcontrol.util.NumberUtil;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -161,8 +164,8 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
         if (((CheckBox) popupView.findViewById(R.id.chkNextExpirations)).isChecked()) {
             expirationStatus.add(ExpirationStatus.WARNING);
         }
-        if (((CheckBox) popupView.findViewById(R.id.chkExpireted)).isChecked()) {
-            expirationStatus.add(ExpirationStatus.EXPIRATED);
+        if (((CheckBox) popupView.findViewById(R.id.chkExpired)).isChecked()) {
+            expirationStatus.add(ExpirationStatus.EXPIRED);
         }
 
         long supplierId = 0;
@@ -219,17 +222,25 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
     private void buildSections(List<SupplierProduct> list) {
 
         this.sectionModelArrayList = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
 
         for (SupplierProduct supplierProduct : list) {
 
             if (supplierProduct.getProducts() != null && supplierProduct.getProducts().size() > 0) {
-
+                products.addAll(supplierProduct.getProducts());
                 this.sectionModelArrayList.add(new SectionModel(supplierProduct.supplier.getName(), supplierProduct.getProducts()));
             }
         }
 
         ProductSectionAdapter sectionRecyclerViewAdapter = new ProductSectionAdapter(this, RecyclerViewType.LINEAR_VERTICAL, this.sectionModelArrayList, this);
         recyclerView.setAdapter(sectionRecyclerViewAdapter);
+
+        SummaryVO summaryVO = viewModel.calculateSummary(products, Integer.parseInt(PreferencesManager.getExpirationDays(this)));
+        if(summaryVO != null)
+        {
+            ((TextView) findViewById(R.id.lblSummaryProducts)).setText(String.format("%s", summaryVO.getTotalProducts()));
+            ((TextView) findViewById(R.id.lblSummaryTotal)).setText(NumberUtil.currencyToString(summaryVO.getTotalAmount()));
+        }
     }
 
     @Override
@@ -271,18 +282,18 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
      */
     private void delete() {
         //confirm if the user really wants delete the product
-        final AlertDialog alerta = new AlertDialog();
+        final AlertDialog alert = new AlertDialog();
 
-        alerta.setAlertType(DialogType.YES_NO);
-        alerta.setMessage(getString(R.string.msg_confirm_delete_product));
+        alert.setAlertType(DialogType.YES_NO);
+        alert.setMessage(getString(R.string.msg_confirm_delete_product));
 
-        alerta.setFirstButtonEvent((dialogInterface, i) -> mDisposable.add(viewModel.deleteItem(listToRemove)
+        alert.setFirstButtonEvent((dialogInterface, i) -> mDisposable.add(viewModel.deleteItem(listToRemove)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onDeleteCompleted,
                         throwable -> showWarningOrErrorMessage(getSaveError(throwable), throwable))));
 
-        alerta.show(getSupportFragmentManager(), "dialogo");
+        alert.show(getSupportFragmentManager(), "dialog");
     }
 
     @Override

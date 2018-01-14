@@ -34,13 +34,15 @@ public class Product {
     @TypeConverters(DateConverter.class)
     private Date expiration;
 
-
     private String barCode;
 
     private long supplierId;
 
     @TypeConverters(BigDecimalConverter.class)
     private BigDecimal quantity;
+
+    @TypeConverters(BigDecimalConverter.class)
+    private BigDecimal value;
 
     @Ignore
     private ExpirationStatus status;
@@ -61,7 +63,8 @@ public class Product {
      * @param quantity   Product quantity
      * @param supplierId Supplier ID
      */
-    public Product(String name, Date expiration, String barCode, BigDecimal quantity, long supplierId) {
+    @Ignore
+    public Product(String name, Date expiration, String barCode,  BigDecimal quantity, long supplierId) {
         this.name = name;
         this.expiration = expiration;
         this.barCode = barCode;
@@ -69,22 +72,24 @@ public class Product {
         this.supplierId = supplierId;
     }
 
+
     /**
      * Constructor
      *
-     * @param id         Product ID
      * @param name       Product name
      * @param expiration Product expiration
+     * @param barCode    Product barcode
      * @param quantity   Product quantity
      * @param supplierId Supplier ID
+     * @param value      Product Value
      */
-    @Ignore
-    public Product(long id, String name, Date expiration, BigDecimal quantity, long supplierId) {
-        this.id = id;
+    public Product(String name, Date expiration, String barCode, BigDecimal quantity, long supplierId, BigDecimal value) {
         this.name = name;
         this.expiration = expiration;
+        this.barCode = barCode;
         this.quantity = quantity;
         this.supplierId = supplierId;
+        this.value = value;
     }
 
     /**
@@ -106,7 +111,7 @@ public class Product {
     }
 
     /**
-     * Returna de Product Name
+     * Return Product Name
      *
      * @return Product name
      */
@@ -124,7 +129,7 @@ public class Product {
     }
 
     /**
-     * Returna the Product Expiration
+     * Return Product Expiration
      *
      * @return Product Expiration
      */
@@ -211,5 +216,21 @@ public class Product {
      */
     public void setBarCode(String barCode) {
         this.barCode = barCode;
+    }
+
+    /**
+     * Return the Product Value
+     * @return Product Value
+     */
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    /**
+     * Set the Product Value
+     * @param value Product Value
+     */
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 }

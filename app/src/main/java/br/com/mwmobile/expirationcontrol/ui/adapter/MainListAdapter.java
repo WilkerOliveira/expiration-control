@@ -27,8 +27,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Recycl
 
     private final int sectionPosition;
     private final Context context;
-    private List<Product> productList;
-    private OnProductListener listener;
+    private final List<Product> productList;
+    private final OnProductListener listener;
 
     /**
      * Constructor
@@ -62,13 +62,19 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Recycl
         if (holder.quantity != null)
             holder.quantity.setText(NumberUtil.currencyToString(product.getQuantity()));
 
+        if (holder.value != null)
+            holder.value.setText(NumberUtil.currencyToString(product.getValue()));
+
+        if (holder.amount != null)
+            holder.amount.setText(NumberUtil.currencyToString(product.getValue().multiply(product.getQuantity())));
+
         holder.itemView.setTag(product.getId());
 
         holder.sectionPosition = this.sectionPosition;
 
         if (product.getStatus() != null) {
-            if (product.getStatus() == ExpirationStatus.EXPIRATED) {
-                holder.viewExpirationStatus.setBackgroundColor(context.getResources().getColor(R.color.expirated));
+            if (product.getStatus() == ExpirationStatus.EXPIRED) {
+                holder.viewExpirationStatus.setBackgroundColor(context.getResources().getColor(R.color.expired));
             } else if (product.getStatus() == ExpirationStatus.WARNING) {
                 holder.viewExpirationStatus.setBackgroundColor(context.getResources().getColor(R.color.warning_expiration));
             } else {
@@ -90,18 +96,22 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Recycl
     static class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         int sectionPosition;
-        View viewExpirationStatus;
-        View itemView;
-        private TextView name;
-        private TextView expirationDate;
-        private TextView quantity;
+        final View viewExpirationStatus;
+        final View itemView;
+        private final TextView name;
+        private final TextView expirationDate;
+        private final TextView quantity;
+        private final TextView value;
+        private final TextView amount;
 
         RecyclerViewHolder(View view) {
             super(view);
             itemView = view;
             name = view.findViewById(R.id.lblProduct);
-            expirationDate = view.findViewById(R.id.lblExpiration);
+            expirationDate = view.findViewById(R.id.txtExpirationDate);
             quantity = view.findViewById(R.id.lblQuantity);
+            value = view.findViewById(R.id.lblVlr);
+            amount = view.findViewById(R.id.lblAmount);
             viewExpirationStatus = view.findViewById(R.id.viewExpirationStatus);
         }
     }

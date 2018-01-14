@@ -77,7 +77,7 @@
 
     <string name="privacy">Privacy</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="privacy_policity_text"><![CDATA[
+    <string name="privacy_policy_text"><![CDATA[
                 <html><head>
                 "<title></title>
                 "</head>
@@ -98,4 +98,17 @@
                 "All data registered through the application has been stored in its entirety on the smartphone itself, and is entirely the responsibility of its users.</div>
                 "</body>
                 "</html>"]]></string>
+    <string name="product_value">Product Value</string>
+    <string name="value">Vlr.</string>
+    <string name="qty">Qty.</string>
+    <string name="amount">Amount</string>
+    <string name="amt">Amt.</string>
+    <string name="summary">Summary</string>
+    <string name="tooltip_remove_helper">Long press to select!</string>
+    <string name="label_value">Vlr.:</string>
+    <string name="label_amt">Amt.:</string>
+    <string name="label_qty">Qty.:</string>
+    <string name="label_products">Products:</string>
+    <string name="label_amount">Amount:</string>
+    <string name="tooltip_edit">Press to edit!</string>
 </resources>

@@ -18,8 +18,7 @@ public class SupplierProduct {
     @Embedded
     public Supplier supplier;
 
-    @Relation(parentColumn = "id",
-            entityColumn = "supplierId")
+    @Relation(parentColumn = "id", entityColumn = "supplierId")
 
     private List<Product> products;
     @Ignore

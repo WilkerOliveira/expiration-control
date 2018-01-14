@@ -15,6 +15,7 @@ import br.com.mwmobile.expirationcontrol.repository.ProductRepository;
 import br.com.mwmobile.expirationcontrol.repository.SupplierProductRepository;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 import br.com.mwmobile.expirationcontrol.repository.local.model.SupplierProduct;
+import br.com.mwmobile.expirationcontrol.ui.model.SummaryVO;
 import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -89,11 +90,7 @@ public class ListProductViewModel extends ViewModel implements ProductComponent.
      */
     public Completable deleteItem(List<Product> products) {
 
-        return new CompletableFromAction(() -> {
-            for (Product product : products) {
-                productRepository.delete(product);
-            }
-        });
+        return new CompletableFromAction(() -> productRepository.delete(products));
     }
 
     @Override
@@ -101,5 +98,14 @@ public class ListProductViewModel extends ViewModel implements ProductComponent.
         cityComponent.inject(this);
     }
 
-
+    /**
+     * Calculate the Summary
+     *
+     * @param products       Product list
+     * @param expirationDays Expiration Days
+     * @return Summary
+     */
+    public SummaryVO calculateSummary(List<Product> products, int expirationDays) {
+        return SummaryViewModel.doSummary(products, expirationDays);
+    }
 }

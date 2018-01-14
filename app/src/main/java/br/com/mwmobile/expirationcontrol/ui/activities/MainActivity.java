@@ -83,7 +83,7 @@ public class MainActivity extends LifecycleAppCompatActivity
 
         loadViewModel();
 
-        setFrament(MainListFragment.newInstance());
+        setFragment(MainListFragment.newInstance());
 
         //Initialize the AdMob
         MobileAds.initialize(this, getString(R.string.admob_key));
@@ -107,7 +107,7 @@ public class MainActivity extends LifecycleAppCompatActivity
                     collapsingToolbarLayout.setTitle(getString(R.string.app_name));
                     isShow = true;
                 } else if (isShow) {
-                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                    collapsingToolbarLayout.setTitle(" ");
                     isShow = false;
                 }
             }
@@ -119,7 +119,7 @@ public class MainActivity extends LifecycleAppCompatActivity
      *
      * @param newFragment Fragment
      */
-    private void setFrament(Fragment newFragment) {
+    private void setFragment(Fragment newFragment) {
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
         if (fragment == null) fragment = newFragment;
@@ -197,12 +197,14 @@ public class MainActivity extends LifecycleAppCompatActivity
             startActivity(new Intent(this, ListSupplierActivity.class));
         } else if (id == R.id.nav_products) {
             startActivity(new Intent(this, ListProductActivity.class));
+        } else if (id == R.id.nav_summary) {
+            startActivity(new Intent(this, SummaryActivity.class));
         } else if (id == R.id.nav_notifications) {
             settingsEnable = true;
             startActivity(new Intent(this, SettingsActivity.class));
 
         } else if (id == R.id.nav_privacy_policy) {
-            startActivity(new Intent(this, PrivacyPolictyActivity.class));
+            startActivity(new Intent(this, PrivacyPolicyActivity.class));
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -245,8 +247,8 @@ public class MainActivity extends LifecycleAppCompatActivity
         if (((CheckBox) popupView.findViewById(R.id.chkNextExpirations)).isChecked()) {
             this.expirationStatus.add(ExpirationStatus.WARNING);
         }
-        if (((CheckBox) popupView.findViewById(R.id.chkExpireted)).isChecked()) {
-            this.expirationStatus.add(ExpirationStatus.EXPIRATED);
+        if (((CheckBox) popupView.findViewById(R.id.chkExpired)).isChecked()) {
+            this.expirationStatus.add(ExpirationStatus.EXPIRED);
         }
 
         this.supplierId = 0;

@@ -13,5 +13,7 @@
 
     <dimen name="check_filter_margin_start">8dp</dimen>
     <dimen name="check_filter_margin_end">8dp</dimen>
+    <dimen name="title_summary">18sp</dimen>
+    <dimen name="summary_item">16sp</dimen>
 
 </resources>

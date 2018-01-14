@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import br.com.mwmobile.expirationcontrol.di.module.ProductModule;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListProductViewModel;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.RegisterProductViewModel;
+import br.com.mwmobile.expirationcontrol.ui.viewmodel.SummaryViewModel;
 import dagger.Component;
 
 /**
@@ -22,6 +23,8 @@ public interface ProductComponent {
     void inject(RegisterProductViewModel viewModel);
 
     void inject(ListProductViewModel viewModel);
+
+    void inject(SummaryViewModel viewModel);
 
     interface Injectable {
         void inject(ProductComponent productComponent);

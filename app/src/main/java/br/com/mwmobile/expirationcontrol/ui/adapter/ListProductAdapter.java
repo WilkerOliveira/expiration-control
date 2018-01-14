@@ -13,10 +13,13 @@ import java.util.List;
 import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
+import br.com.mwmobile.expirationcontrol.ui.activities.ListProductActivity;
 import br.com.mwmobile.expirationcontrol.util.DateUtil;
 import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
 import br.com.mwmobile.expirationcontrol.util.ImageUtil;
 import br.com.mwmobile.expirationcontrol.util.NumberUtil;
+import br.com.mwmobile.expirationcontrol.util.Utility;
+import it.sephiroth.android.library.tooltip.Tooltip;
 
 /**
  * Product Adapter
@@ -29,25 +32,29 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
     private final int sectionPosition;
     private final int expirationDays;
+    private final Context context;
+    private final OnProductListener listener;
+    private final boolean fullList;
     private List<Product> productList;
-    private OnProductListener listener;
-    private boolean fullList;
+    private boolean tooltip;
 
     /**
      * Constructor
      *
+     * @param context         Context
      * @param productList     List of Products
      * @param sectionPosition Section Position
      * @param listener        Event listener
      * @param fullList        Show or not the full designer
      * @param expirationDays  Expiration Day
      */
-    public ListProductAdapter(List<Product> productList, int sectionPosition, OnProductListener listener, boolean fullList, int expirationDays) {
+    public ListProductAdapter(Context context, List<Product> productList, int sectionPosition, OnProductListener listener, boolean fullList, int expirationDays) {
         this.productList = productList;
         this.listener = listener;
         this.fullList = fullList;
         this.sectionPosition = sectionPosition;
         this.expirationDays = expirationDays;
+        this.context = context;
 
     }
 
@@ -69,8 +76,8 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
         //check if the product has status
         if (product.getStatus() != null) {
-            if (product.getStatus() == ExpirationStatus.EXPIRATED) {
-                holder.expirationDate.setTextColor(((Context) this.listener).getResources().getColor(R.color.expirated));
+            if (product.getStatus() == ExpirationStatus.EXPIRED) {
+                holder.expirationDate.setTextColor(((Context) this.listener).getResources().getColor(R.color.expired));
             } else if (product.getStatus() == ExpirationStatus.WARNING) {
                 holder.expirationDate.setTextColor(((Context) this.listener).getResources().getColor(R.color.warning_expiration));
             } else {
@@ -81,6 +88,12 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
         if (holder.quantity != null)
             holder.quantity.setText(NumberUtil.currencyToString(product.getQuantity()));
 
+        if (holder.value != null)
+            holder.value.setText(NumberUtil.currencyToString(product.getValue()));
+
+        if (holder.amount != null)
+            holder.amount.setText(NumberUtil.currencyToString(product.getValue().multiply(product.getQuantity())));
+
         holder.itemView.setTag(product.getId());
 
         holder.sectionPosition = this.sectionPosition;
@@ -90,7 +103,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
             ImageUtil.setLetter(holder.imgLetter, product.getName());
 
             holder.imgLetter.setOnLongClickListener(view -> {
-                holder.imgLetter.setImageResource(R.drawable.ic_check);
+                holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);
                 listener.onLongClick(product);
                 return true;
             });
@@ -104,6 +117,16 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
         }
 
         holder.itemView.setOnClickListener(view -> listener.onClick(product));
+
+        if (!tooltip) {
+            if (context instanceof ListProductActivity) {
+                Utility.showTooltipHelper(this.context, holder.imgLetter, this.context.getString(R.string.tooltip_remove_helper), Tooltip.Gravity.BOTTOM);
+            }
+
+            this.tooltip = true;
+
+            Utility.showTooltipHelper(this.context, holder.itemView, this.context.getString(R.string.tooltip_edit), Tooltip.Gravity.RIGHT);
+        }
     }
 
     @Override
@@ -125,19 +148,23 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
      */
     static class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
+        final ImageView imgLetter;
+        final View itemView;
+        private final TextView name;
+        private final TextView expirationDate;
+        private final TextView quantity;
+        private final TextView value;
+        private final TextView amount;
         int sectionPosition;
-        ImageView imgLetter;
-        View itemView;
-        private TextView name;
-        private TextView expirationDate;
-        private TextView quantity;
 
         RecyclerViewHolder(View view) {
             super(view);
             itemView = view;
-            name = view.findViewById(R.id.txtSupplier);
+            name = view.findViewById(R.id.txtProduct);
             expirationDate = view.findViewById(R.id.txtExpirationDate);
             quantity = view.findViewById(R.id.lblQuantity);
+            value = view.findViewById(R.id.lblVlr);
+            amount = view.findViewById(R.id.lblAmount);
             imgLetter = view.findViewById(R.id.imgLetter);
         }
     }

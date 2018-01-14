@@ -18,8 +18,8 @@ import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
 public class SectionViewHolder extends RecyclerView.ViewHolder {
 
     public DividerItemDecoration itemDecoration;
-    public TextView sectionLabel;
-    public RecyclerView itemRecyclerView;
+    public final TextView sectionLabel;
+    public final RecyclerView itemRecyclerView;
 
     public SectionViewHolder(View itemView) {
         super(itemView);

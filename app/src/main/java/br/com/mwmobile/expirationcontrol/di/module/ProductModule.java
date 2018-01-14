@@ -21,7 +21,7 @@ import dagger.Provides;
 @Module
 public class ProductModule {
 
-    private ExpirationControlApplication application;
+    private final ExpirationControlApplication application;
 
     public ProductModule(ExpirationControlApplication mApplication) {
         application = mApplication;
@@ -41,13 +41,13 @@ public class ProductModule {
 
     @Singleton
     @Provides
-    ProductRepository providProductRepository(ProductDao productDao) {
+    ProductRepository providesProductRepository(ProductDao productDao) {
         return ProductRepository.getInstance(productDao);
     }
 
     @Singleton
     @Provides
-    SupplierProductRepository providSupplierProductRepository(SupplierProductDao supplierProductDao) {
+    SupplierProductRepository providesSupplierProductRepository(SupplierProductDao supplierProductDao) {
         return SupplierProductRepository.getInstance(supplierProductDao);
     }
 }

@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import br.com.mwmobile.expirationcontrol.R;
+import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.ui.adapter.util.RecyclerViewType;
 import br.com.mwmobile.expirationcontrol.ui.adapter.util.SectionModel;
 import br.com.mwmobile.expirationcontrol.ui.adapter.viewModel.SectionViewHolder;
 import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
-import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 
 import static br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration.SHOW_FIRST_DIVIDER;
@@ -31,9 +31,9 @@ import static br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecorati
 public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolder> {
 
     private final OnProductListener listener;
-    private Context context;
-    private RecyclerViewType recyclerViewType;
-    private ArrayList<SectionModel> sectionModelArrayList;
+    private final Context context;
+    private final RecyclerViewType recyclerViewType;
+    private final ArrayList<SectionModel> sectionModelArrayList;
 
     /**
      * Constructor
@@ -71,7 +71,7 @@ public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolde
         holder.itemRecyclerView.setHasFixedSize(true);
         holder.itemRecyclerView.setNestedScrollingEnabled(false);
 
-        /* set layout manager on basis of recyclerview enum type */
+        /* set layout manager on basis of recyclerView enum type */
         switch (recyclerViewType) {
             case LINEAR_VERTICAL:
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
@@ -87,7 +87,8 @@ public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolde
                 break;
         }
 
-        ListProductAdapter adapter = new ListProductAdapter(sectionModel.getProductList(), position, listener, true, Integer.parseInt(PreferencesManager.getExpirationDays(context)));
+        ListProductAdapter adapter = new ListProductAdapter(context, sectionModel.getProductList(), position, listener,
+                true, Integer.parseInt(PreferencesManager.getExpirationDays(context)));
         holder.itemRecyclerView.setAdapter(adapter);
 
     }
@@ -96,6 +97,5 @@ public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolde
     public int getItemCount() {
         return sectionModelArrayList.size();
     }
-
 
 }

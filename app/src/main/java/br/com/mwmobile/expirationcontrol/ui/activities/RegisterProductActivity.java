@@ -15,8 +15,8 @@ import android.widget.EditText;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 
+import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.R;
@@ -49,10 +49,11 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
     EditText inputProduct;
     EditText txtExpirationDate;
     EditText inputQuantity;
+    EditText inputProductValue;
     EditText inputBarCode;
     List<Supplier> supplierList;
     long supplierId;
-    private Date expirationDate;
+
     private DatePickerDialog fromDatePickerDialog;
     private ListSupplierViewModel listSupplierViewModel;
     private RegisterProductViewModel productViewModel;
@@ -125,6 +126,9 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
         inputQuantity = findViewById(R.id.inputQuantity);
         inputQuantity.addTextChangedListener(new MoneyTextWatcher(inputQuantity));
 
+        inputProductValue = findViewById(R.id.inputProductValue);
+        inputProductValue.addTextChangedListener(new MoneyTextWatcher(inputProductValue));
+
         ((MaterialSpinner) findViewById(R.id.spnSupplier)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -152,8 +156,7 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
         fromDatePickerDialog = new DatePickerDialog(this, (view, year, monthOfYear, dayOfMonth) -> {
             Calendar newDate = Calendar.getInstance();
             newDate.set(year, monthOfYear, dayOfMonth);
-            expirationDate = newDate.getTime();
-            txtExpirationDate.setText(DateUtil.parseToString(expirationDate));
+            txtExpirationDate.setText(DateUtil.parseToString(newDate.getTime()));
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
     }
@@ -215,14 +218,14 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
         inputProduct.setText(selectedProduct.getName());
 
         txtExpirationDate.setText(DateUtil.parseToString(selectedProduct.getExpiration()));
-        expirationDate = selectedProduct.getExpiration();
 
         inputQuantity.setText(NumberUtil.currencyToString(selectedProduct.getQuantity()));
+
+        inputProductValue.setText(NumberUtil.currencyToString(selectedProduct.getValue()));
 
         inputBarCode.setText(selectedProduct.getBarCode());
 
         setSelectedSupplier(selectedProduct.getSupplierId());
-
     }
 
     /**
@@ -285,6 +288,7 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
         inputProduct.setText("");
         txtExpirationDate.setText("");
         inputBarCode.setText("");
+        inputProductValue.setText("");
 
         if (!(getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().containsKey("supplierId"))) {
             setSupplierId();
@@ -304,19 +308,26 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
                 this.supplierId == 0)
             showWarningMessage(R.string.msg_required_fields);
         else {
-            if (selectedProduct == null) selectedProduct = new Product();
+            try {
+                if (selectedProduct == null) selectedProduct = new Product();
 
-            selectedProduct.setName(inputProduct.getText().toString());
-            selectedProduct.setExpiration(expirationDate);
-            selectedProduct.setQuantity(NumberUtil.toCurrencyBigDecimal(inputQuantity.getText().toString()));
-            selectedProduct.setSupplierId(supplierId);
-            selectedProduct.setBarCode(TextUtils.isEmpty(inputBarCode.getText().toString()) ? null : inputBarCode.getText().toString());
+                selectedProduct.setName(inputProduct.getText().toString());
 
-            mDisposable.add(productViewModel.insertOrUpdate(selectedProduct)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::productSaved,
-                            throwable -> showWarningOrErrorMessage(getSaveError(throwable), throwable)));
+                selectedProduct.setExpiration(DateUtil.parseToDate(txtExpirationDate.getText().toString()));
+
+                selectedProduct.setQuantity(NumberUtil.toCurrencyBigDecimal(inputQuantity.getText().toString()));
+                selectedProduct.setValue(NumberUtil.toCurrencyBigDecimal(inputProductValue.getText().toString()));
+                selectedProduct.setSupplierId(supplierId);
+                selectedProduct.setBarCode(TextUtils.isEmpty(inputBarCode.getText().toString()) ? null : inputBarCode.getText().toString());
+
+                mDisposable.add(productViewModel.insertOrUpdate(selectedProduct)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(this::productSaved,
+                                throwable -> showWarningOrErrorMessage(getSaveError(throwable), throwable)));
+            } catch (ParseException e) {
+                showWarningOrErrorMessage(R.string.msg_invalid_expiration_date, e);
+            }
         }
         hideSoftKeyboard();
     }
@@ -333,7 +344,6 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
      * Start the BarCode Scan
      */
     private void startScan() {
-
         MaterialBarcodeScannerBuilder builder = BarcodeScanner.newBuilderInstance(getString(R.string.searching), this);
 
         builder.withResultListener(barcode -> inputBarCode.setText(barcode.rawValue)).build().startScan();

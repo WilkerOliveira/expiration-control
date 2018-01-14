@@ -50,10 +50,18 @@
             android:name=".jobservice.NotificationJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name=".ui.activities.PrivacyPolictyActivity"
+        <activity
+            android:name=".ui.activities.PrivacyPolicyActivity"
             android:label="@string/privacy_policy"
             android:parentActivityName=".ui.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.activities.SummaryActivity"
+            android:label="@string/summary"
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

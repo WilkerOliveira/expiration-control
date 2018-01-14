@@ -1,5 +1,6 @@
 package br.com.mwmobile.expirationcontrol.util;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.text.DateFormat;
@@ -54,7 +55,7 @@ public class DateUtil {
      * @return Diff days
      */
     public static int getDifferenceDays(Date date1, Date date2) {
-        int daysdiff = 0;
+        int daysdiff;
         long diff = date2.getTime() - date1.getTime();
         long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
         daysdiff = (int) diffDays;
@@ -78,7 +79,7 @@ public class DateUtil {
             int msDiff = DateUtil.getDifferenceDays(Calendar.getInstance().getTime(), expirationDate.getTime());
 
             if (msDiff <= 0) {
-                product.setStatus(ExpirationStatus.EXPIRATED);
+                product.setStatus(ExpirationStatus.EXPIRED);
             } else if (msDiff <= expirationDays) {
                 product.setStatus(ExpirationStatus.WARNING);
             } else {
@@ -89,7 +90,20 @@ public class DateUtil {
             Log.e(Constants.ERROR_TAG, e.getMessage());
             //Do Nothing
         }
-
     }
 
+    /**
+     * Parse data string to date
+     *
+     * @param date Date to parse
+     * @return Parsed date
+     */
+    public static Date parseToDate(String date) throws ParseException {
+        if (!TextUtils.isEmpty(date)) {
+            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+            return dateFormat.parse(date);
+        }
+
+        return null;
+    }
 }

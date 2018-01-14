@@ -27,13 +27,13 @@ public class ListMainModule {
 
     @Singleton
     @Provides
-    SupplierProductDao providesSupplierProductDao() {
+    SupplierProductDao provideSupplierProductDao() {
         return AppDatabase.getDatabase(application).itemSupplierProductDAO();
     }
 
     @Singleton
     @Provides
-    SupplierProductRepository providSupplierProductRepository(SupplierProductDao supplierProductDao) {
+    SupplierProductRepository provideSupplierProductRepository(SupplierProductDao supplierProductDao) {
         return SupplierProductRepository.getInstance(supplierProductDao);
     }
 }

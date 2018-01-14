@@ -84,12 +84,8 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
             if (notificationAlert) {
 
-                int period = Integer.parseInt(sharedPreferences.getAll().get(getString(R.string.period_days_alert)).toString());
-
-                if (period <= 0) period = 1;
-
                 //NotificationJobService.createJob(period, serviceName, scheduler);
-                NotificationJobService.schedule(this, period);
+                NotificationJobService.schedule(this);
 
             } else {
                 cancelJobs(scheduler);

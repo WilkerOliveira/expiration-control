@@ -18,7 +18,7 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
  * @since 24/09/2017
  */
 
-@Database(entities = {Supplier.class, Product.class}, version = 2)
+@Database(entities = {Supplier.class, Product.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**
@@ -29,9 +29,22 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE 'product' ADD COLUMN 'barCode' TEXT NULL");
+            database.execSQL("ALTER TABLE 'Product' ADD COLUMN 'barCode' TEXT NULL");
         }
     };
+
+    /**
+     * Migration to add product value column to table Product
+     *
+     * @since 02/01/2017
+     */
+    public static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE 'Product' ADD COLUMN 'value' TEXT NULL");
+        }
+    };
+
     private static AppDatabase INSTANCE;
 
     /**
@@ -45,6 +58,7 @@ public abstract class AppDatabase extends RoomDatabase {
             INSTANCE =
                     Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "expControl_db")
                             .addMigrations(MIGRATION_1_2) //ADD MIGRATION TO VERSION 2
+                            .addMigrations(MIGRATION_2_3) //ADD MIGRATION TO VERSION 3
                             .build();
         }
         return INSTANCE;

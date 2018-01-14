@@ -1,5 +1,6 @@
 package br.com.mwmobile.expirationcontrol.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnSupplierListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
 import br.com.mwmobile.expirationcontrol.util.ImageUtil;
+import br.com.mwmobile.expirationcontrol.util.Utility;
+import it.sephiroth.android.library.tooltip.Tooltip;
 
 /**
  * Supplier Adapter
@@ -24,18 +27,22 @@ import br.com.mwmobile.expirationcontrol.util.ImageUtil;
 
 public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapter.RecyclerViewHolder> {
 
+    private final OnSupplierListener listener;
+    private final Context context;
     private List<Supplier> supplierList;
-    private OnSupplierListener listener;
+    private boolean tooltip;
 
     /**
-     * Construtor
+     * Constructor
      *
      * @param supplierList Supplier list
      * @param listener     Event listener
+     * @param context      Context
      */
-    public ListSupplierAdapter(List<Supplier> supplierList, OnSupplierListener listener) {
+    public ListSupplierAdapter(List<Supplier> supplierList, OnSupplierListener listener, Context context) {
         this.supplierList = supplierList;
         this.listener = listener;
+        this.context = context;
     }
 
     @Override
@@ -54,7 +61,7 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
         ImageUtil.setLetter(holder.imgLetter, supplier.getName());
 
         holder.imgLetter.setOnLongClickListener(view -> {
-            holder.imgLetter.setImageResource(R.drawable.ic_check);
+            holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);
             listener.onLongClick(supplier);
             return true;
         });
@@ -65,6 +72,12 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
         });
 
         holder.itemView.setOnClickListener(view -> listener.onClick(position));
+        if (!tooltip) {
+            Utility.showTooltipHelper(this.context, holder.imgLetter, this.context.getString(R.string.tooltip_remove_helper), Tooltip.Gravity.BOTTOM);
+            this.tooltip = true;
+
+            Utility.showTooltipHelper(this.context, holder.itemView, this.context.getString(R.string.tooltip_edit), Tooltip.Gravity.RIGHT);
+        }
     }
 
     @Override
@@ -86,9 +99,9 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
      */
     static class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgLetter;
-        View itemView;
-        private TextView txtName;
+        final ImageView imgLetter;
+        final View itemView;
+        private final TextView txtName;
 
         RecyclerViewHolder(View view) {
             super(view);

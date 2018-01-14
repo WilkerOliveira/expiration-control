@@ -18,7 +18,7 @@ import br.com.mwmobile.expirationcontrol.di.component.SupplierComponent;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private ExpirationControlApplication application;
+    private final ExpirationControlApplication application;
 
     public ViewModelFactory(ExpirationControlApplication application) {
         this.application = application;

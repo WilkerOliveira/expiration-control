@@ -43,10 +43,13 @@ public interface ProductDao {
     @Query("select * from Product where id = :id")
     Single<Product> getById(long id);
 
+    @Query("select * from Product where id = :id")
+    Product getByIdSync(long id);
+
     @Insert(onConflict = REPLACE)
     void insertOrUpdate(Product product);
 
     @Delete
-    void delete(Product product);
+    void delete(List<Product> products);
 
 }

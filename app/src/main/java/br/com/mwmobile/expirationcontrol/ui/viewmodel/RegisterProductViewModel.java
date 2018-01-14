@@ -52,7 +52,7 @@ public class RegisterProductViewModel extends ViewModel implements ProductCompon
      * @return Product data
      */
     public Single<Product> getById(long id) {
-        //Add bussines logic here
+        //Add business logic here
 
         return productRepository.getById(id);
     }

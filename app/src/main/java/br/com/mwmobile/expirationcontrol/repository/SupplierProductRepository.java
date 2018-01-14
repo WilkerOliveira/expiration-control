@@ -18,7 +18,7 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.SupplierProduct;
 public class SupplierProductRepository {
 
     private static SupplierProductRepository instance;
-    private SupplierProductDao supplierProductDao;
+    private final SupplierProductDao supplierProductDao;
 
     private SupplierProductRepository(SupplierProductDao supplierProductDao) {
         this.supplierProductDao = supplierProductDao;

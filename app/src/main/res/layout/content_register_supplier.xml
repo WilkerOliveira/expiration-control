@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputSupplier" />
 
     <TextView
-        android:id="@+id/lblProducts"
+        android:id="@+id/lblExpProducts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -62,8 +62,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/lblProducts"
-        app:layout_constraintTop_toBottomOf="@+id/lblProducts" />
+        app:layout_constraintStart_toStartOf="@+id/lblExpProducts"
+        app:layout_constraintTop_toBottomOf="@+id/lblExpProducts" />
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/contentLoading"
@@ -78,7 +78,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblProducts" />
+        app:layout_constraintTop_toBottomOf="@+id/lblExpProducts" />
 
 
 

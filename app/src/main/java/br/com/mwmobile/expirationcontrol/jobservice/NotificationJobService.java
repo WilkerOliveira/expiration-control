@@ -40,15 +40,19 @@ public class NotificationJobService extends JobService {
     private static final long ONE_DAY_INTERVAL = 24 * 60 * 60 * 1000L; // 1 Day
 
     /**
+     * Interval to monitoring
+     */
+    private static final long INTERVAL = 1;
+
+    /**
      * Schedule the Notification Process
      *
      * @param context  Context
-     * @param interval Interval to Monitoring
      */
-    public static void schedule(Context context, int interval) {
+    public static void schedule(Context context) {
         ComponentName component = new ComponentName(context, NotificationJobService.class);
         JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, component)
-                .setPeriodic(interval * ONE_DAY_INTERVAL);
+                .setPeriodic(INTERVAL * ONE_DAY_INTERVAL);
 
         JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (jobScheduler != null) {
@@ -135,7 +139,7 @@ public class NotificationJobService extends JobService {
 
                 DateUtil.setExpirationStatus(expirationDays, product);
 
-                if (product.getStatus() == ExpirationStatus.WARNING || product.getStatus() == ExpirationStatus.EXPIRATED) {
+                if (product.getStatus() == ExpirationStatus.WARNING || product.getStatus() == ExpirationStatus.EXPIRED) {
                     isExpiring = true;
                     break;
                 }

@@ -17,7 +17,7 @@ import io.reactivex.Single;
 public class SupplierRepository {
 
     private static SupplierRepository instance;
-    SupplierDao supplierDao;
+    final SupplierDao supplierDao;
 
     private SupplierRepository(SupplierDao supplierDao) {
         this.supplierDao = supplierDao;

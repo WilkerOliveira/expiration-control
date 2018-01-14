@@ -54,8 +54,8 @@ public class ListSupplierViewModel extends ViewModel implements SupplierComponen
     }
 
     @Override
-    public void inject(SupplierComponent tripComponent) {
-        tripComponent.inject(this);
+    public void inject(SupplierComponent supplierComponent) {
+        supplierComponent.inject(this);
     }
 
 }

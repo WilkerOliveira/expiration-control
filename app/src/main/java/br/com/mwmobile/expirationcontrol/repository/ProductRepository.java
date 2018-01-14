@@ -19,7 +19,7 @@ import io.reactivex.Single;
 public class ProductRepository {
 
     private static ProductRepository instance;
-    private ProductDao productDao;
+    private final ProductDao productDao;
 
     private ProductRepository(ProductDao productDao) {
         this.productDao = productDao;
@@ -87,10 +87,10 @@ public class ProductRepository {
     /**
      * Delete a product
      *
-     * @param product Product to delete
+     * @param products Products to delete
      */
-    public void delete(Product product) {
-        productDao.delete(product);
+    public void delete(List<Product> products) {
+        productDao.delete(products);
     }
 
     /**
@@ -101,6 +101,16 @@ public class ProductRepository {
      */
     public List<Product> getByName(String name) {
         return productDao.getByName(name);
+    }
+
+    /**
+     * Get a Product by Id
+     *
+     * @param id Product's id
+     * @return Product data
+     */
+    public Product getByIdSync(long id) {
+        return productDao.getByIdSync(id);
     }
 
 }

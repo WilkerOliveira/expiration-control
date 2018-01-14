@@ -58,7 +58,7 @@ public class RegisterSupplierViewModel extends ViewModel implements SupplierComp
      */
     public Single<Supplier> getById(long id) {
 
-        //Add bussines logic here
+        //Add business logic here
 
         return supplierRepository.getById(id);
     }

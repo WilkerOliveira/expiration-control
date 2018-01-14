@@ -34,12 +34,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayoutEndDate"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayoutQuantity"
         app:layout_constraintHorizontal_weight="0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtInputProduct"
         app:layout_constraintTop_toBottomOf="@+id/txtInputProduct">
 
         <EditText
@@ -53,11 +51,10 @@
             android:inputType="date"
             tools:text="@string/fake_date" />
 
-
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayoutEndDate"
+        android:id="@+id/textInputLayoutQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -74,9 +71,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:maxLength="16"
             android:gravity="center"
             android:hint="@string/quantity"
-            android:inputType="date" />
+            android:inputType="number" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutExpirationDate">
+
+        <EditText
+            android:id="@+id/inputProductValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="16"
+            android:hint="@string/product_value"
+            android:inputType="number" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -90,7 +110,7 @@
         android:text="@string/supplier_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutExpirationDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutValue" />
 
     <fr.ganfra.materialspinner.MaterialSpinner
         android:id="@+id/spnSupplier"
@@ -116,8 +136,8 @@
         app:layout_constraintTop_toBottomOf="@+id/spnSupplier">
 
         <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
             android:id="@+id/inputBarCode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/barcode" />
     </android.support.design.widget.TextInputLayout>

@@ -39,6 +39,19 @@ android {
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
+
+    flavorDimensions "versionCode"
+    productFlavors {
+        pro {
+
+        }
+        validation {
+            applicationIdSuffix = ".validation"
+        }
+        /*free {
+
+        }*/
+    }
 }
 
 dependencies {
@@ -69,6 +82,9 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:' + rootProject.circleImageViewVersion
     compile 'com.github.bumptech.glide:glide:' + rootProject.glideVersion
     annotationProcessor 'com.github.bumptech.glide:compiler:' + rootProject.glideVersion
+
+    //TOOLTIP-LIBRARY
+    compile 'it.sephiroth.android.library.targettooltip:target-tooltip-library:' + rootProject.tooltipLibrary
 
     //BarcodeScanner
     compile 'com.edwardvanraak:MaterialBarcodeScanner:' + rootProject.barcodeScanner

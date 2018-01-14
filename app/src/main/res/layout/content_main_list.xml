@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/viewExpirationStatus"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,21 +19,77 @@
         tools:text="PRODUCT" />
 
     <TextView
-        android:id="@+id/lblExpiration"
+        android:id="@+id/txtExpirationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblProduct"
+        app:layout_constraintTop_toBottomOf="@+id/lblProduct"
+        tools:text="00/00/0000" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_value"
+        app:layout_constraintStart_toStartOf="@+id/txtExpirationDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtExpirationDate" />
+
+    <TextView
+        android:id="@+id/txtAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_amt"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/lblVlr"
+        app:layout_constraintTop_toBottomOf="@+id/txtExpirationDate" />
+
+    <TextView
+        android:id="@+id/lblAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/lblProduct"
-        tools:text="@string/default_date" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/txtAmount"
+        app:layout_constraintTop_toBottomOf="@+id/txtExpirationDate"
+        tools:text="0" />
+
+
+    <TextView
+        android:id="@+id/txtQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_qty"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/lblQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/lblProduct" />
+
+    <TextView
+        android:id="@+id/lblVlr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/value"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/txtExpirationDate"
+        tools:text="0" />
 
     <TextView
         android:id="@+id/lblQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/lblProduct"
+        app:layout_constraintEnd_toStartOf="@+id/viewExpirationStatus"
         app:layout_constraintTop_toBottomOf="@+id/lblProduct"
         tools:text="0" />
 
@@ -46,21 +102,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/quantity"
-        app:layout_constraintEnd_toStartOf="@+id/lblQuantity"
-        app:layout_constraintTop_toBottomOf="@+id/lblProduct" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/expiration"
-        app:layout_constraintStart_toStartOf="@+id/lblProduct"
-        app:layout_constraintTop_toBottomOf="@+id/lblProduct" />
 </android.support.constraint.ConstraintLayout>

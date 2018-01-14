@@ -16,7 +16,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 public class BarcodeScanner {
 
     /**
-     * Returna an Instance of  MaterialBarcodeScannerBuilder
+     * Return an Instance of  MaterialBarcodeScannerBuilder
      *
      * @param text    Text to display while searching
      * @param context Activity context

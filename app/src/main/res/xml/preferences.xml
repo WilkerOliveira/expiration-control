@@ -16,13 +16,4 @@
         android:summary="@string/summary_expiration_notification_alert"
         android:title="@string/title_expiration_notification_alert" />
 
-    <EditTextPreference
-        android:key="@string/period_days_alert"
-        android:summary="@string/summary_period_days_alert"
-        android:defaultValue="@string/default_period_days_alert"
-        android:inputType="number"
-        android:maxLength="3"
-        android:digits="1234567890"
-        android:title="@string/title_period_days_alert" />
-
 </PreferenceScreen>

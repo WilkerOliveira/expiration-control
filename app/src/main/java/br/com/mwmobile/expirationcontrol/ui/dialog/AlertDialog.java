@@ -83,76 +83,24 @@ public class AlertDialog extends DialogFragment {
         return builder;
     }
 
-    public DialogInterface.OnClickListener getFirstButtonEvent() {
-        return firstButtonEvent;
-    }
-
     public void setFirstButtonEvent(DialogInterface.OnClickListener firstButtonEvent) {
         this.firstButtonEvent = firstButtonEvent;
-    }
-
-    public DialogInterface.OnClickListener getSecondButtonEvent() {
-        return secondButtonEvent;
-    }
-
-    public void setSecondButtonEvent(DialogInterface.OnClickListener secondButtonEvent) {
-        this.secondButtonEvent = secondButtonEvent;
-    }
-
-    public int getAlertType() {
-        return alertType;
     }
 
     public void setAlertType(int alertType) {
         this.alertType = alertType;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isMultiList() {
-        return multiList;
-    }
-
-    public void setMultiList(boolean multiList) {
-        this.multiList = multiList;
-    }
-
-    public ListAdapter getListAdapter() {
-        return listAdapter;
-    }
-
-    public void setListAdapter(ListAdapter listAdapter) {
-        this.listAdapter = listAdapter;
     }
 
     public int getTextFirstButton() {
         return textFirstButton;
     }
 
-    public void setTextFirstButton(int textFirstButton) {
-        this.textFirstButton = textFirstButton;
-    }
-
     public int getTextSecondButton() {
         return textSecondButton;
-    }
-
-    public void setTextSecondButton(int textSecondButton) {
-        this.textSecondButton = textSecondButton;
     }
 
 

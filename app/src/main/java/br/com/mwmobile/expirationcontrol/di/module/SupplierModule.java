@@ -20,7 +20,7 @@ import dagger.Provides;
 @Module
 public class SupplierModule {
 
-    private ExpirationControlApplication application;
+    private final ExpirationControlApplication application;
 
     public SupplierModule(ExpirationControlApplication mApplication) {
         application = mApplication;

@@ -9,5 +9,5 @@ package br.com.mwmobile.expirationcontrol.util;
  */
 
 public enum ExpirationStatus {
-    VALID_PERIOD, WARNING, EXPIRATED, ALL
+    VALID_PERIOD, WARNING, EXPIRED, ALL
 }

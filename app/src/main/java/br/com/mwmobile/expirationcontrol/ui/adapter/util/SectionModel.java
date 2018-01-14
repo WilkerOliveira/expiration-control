@@ -13,8 +13,8 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
  */
 public class SectionModel {
 
-    private String sectionLabel;
-    private List<Product> productList;
+    private final String sectionLabel;
+    private final List<Product> productList;
 
     /**
      * Constructor

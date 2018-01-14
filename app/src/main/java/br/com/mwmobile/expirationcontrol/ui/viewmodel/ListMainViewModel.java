@@ -74,7 +74,7 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
                         if (expirationStatus.contains(ExpirationStatus.WARNING) && product.getStatus() == ExpirationStatus.WARNING) {
                             processedProducts.add(product);
                         }
-                        if (expirationStatus.contains(ExpirationStatus.EXPIRATED) && product.getStatus() == ExpirationStatus.EXPIRATED) {
+                        if (expirationStatus.contains(ExpirationStatus.EXPIRED) && product.getStatus() == ExpirationStatus.EXPIRED) {
                             processedProducts.add(product);
                         }
                         if (expirationStatus.contains(ExpirationStatus.VALID_PERIOD) && product.getStatus() == ExpirationStatus.VALID_PERIOD) {
@@ -88,7 +88,7 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
 
                     if (product.getStatus() == ExpirationStatus.WARNING) {
                         totalWarning++;
-                    } else if (product.getStatus() == ExpirationStatus.EXPIRATED) {
+                    } else if (product.getStatus() == ExpirationStatus.EXPIRED) {
                         totalExpired++;
                     } else if (product.getStatus() == ExpirationStatus.VALID_PERIOD) {
                         totalValid++;
