@@ -72,8 +72,8 @@
     <string name="content_title_products_expiring">Products expiring</string>
     <string name="summary_products">A summary of your products will be list here</string>
 
-    <string name="admob_key">YOUR_KEY</string>
-    <string name="adUnitId">YOUR_KEY</string>
+    <string name="admob_key">TESTE</string>
+    <string name="adUnitId">TESTE</string>
 
     <string name="privacy">Privacy</string>
     <string name="privacy_policy">Privacy Policy</string>

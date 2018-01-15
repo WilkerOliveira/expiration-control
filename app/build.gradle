@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "br.com.mwmobile.expirationcontrol"
         minSdkVersion 22
         targetSdkVersion 26
-        versionCode 3
-        versionName "1.1"
+        versionCode 6
+        versionName "2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // used by Room, to test migrations
@@ -19,14 +21,14 @@ android {
 
         multiDexEnabled true
     }
-
     buildTypes {
         debug {
             debuggable true
         }
         release {
             debuggable false
-            minifyEnabled false
+            //minifyEnabled true
+            //shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,12 +36,10 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-
     // used by Room, to test migrations
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
-
     flavorDimensions "versionCode"
     productFlavors {
         pro {
@@ -55,8 +55,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Support libraries
     implementation 'com.android.support:support-v4:' + rootProject.supportLibVersion
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -64,7 +63,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:' + rootProject.supportLibVersion
     compile 'com.android.support:recyclerview-v7:' + rootProject.supportLibVersion
     compile 'com.android.support.constraint:constraint-layout:' + rootProject.constraintLayoutVersion
-
     // Architecture components
     compile 'android.arch.lifecycle:extensions:' + rootProject.archLifecycleVersion
     compile 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion
@@ -72,7 +70,6 @@ dependencies {
     implementation "android.arch.lifecycle:reactivestreams:" + rootProject.archLifecycleVersion
     annotationProcessor "android.arch.persistence.room:compiler:" + rootProject.archRoomVersion
     compile "android.arch.persistence.room:rxjava2:" + rootProject.archRoomVersion
-
     //3rd Libraries
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:' + rootProject.textDrawableVersion
     compile("com.github.ganfra:material-spinner:$rootProject.materialSpinnerVersion") {
@@ -82,44 +79,32 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:' + rootProject.circleImageViewVersion
     compile 'com.github.bumptech.glide:glide:' + rootProject.glideVersion
     annotationProcessor 'com.github.bumptech.glide:compiler:' + rootProject.glideVersion
-
     //TOOLTIP-LIBRARY
     compile 'it.sephiroth.android.library.targettooltip:target-tooltip-library:' + rootProject.tooltipLibrary
-
     //BarcodeScanner
     compile 'com.edwardvanraak:MaterialBarcodeScanner:' + rootProject.barcodeScanner
-
     // RxJava
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
-
     //Dagger2
     compile 'com.google.dagger:dagger:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
-
     //CircleProgress
     compile 'com.github.lzyzsd:circleprogress:1.2.1'
-
     // Testing-only dependencies
     testImplementation 'junit:junit:4.12'
-
     // Android Testing Support Library's runner and rules
     androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "com.android.support.test:rules:$rootProject.runnerVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$rootProject.roomVersion"
-
     //Mock Dagger 2
     testCompile 'com.github.fabioCollini.daggermock:daggermock:0.8.2'
     androidTestCompile 'com.github.fabioCollini.daggermock:daggermock:0.8.2'
-
     //AdMOB
     compile 'com.google.android.gms:play-services-ads:' + rootProject.androidGSMVersion
     compile 'com.google.android.gms:play-services:' + rootProject.androidGSMVersion
     compile 'com.google.firebase:firebase-core:' + rootProject.androidGSMVersion
     compile 'com.google.firebase:firebase-messaging:' + rootProject.androidGSMVersion
-
     //MULTIDEX
     compile 'com.android.support:multidex:1.0.2'
-
-
 }

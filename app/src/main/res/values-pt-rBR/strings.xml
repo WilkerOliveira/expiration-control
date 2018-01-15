@@ -72,8 +72,8 @@
     <string name="content_title_products_expiring">Produtos vencendo</string>
     <string name="summary_products">Um resumo dos produtos serão listados aqui</string>
 
-    <string name="admob_key">YOUR_KEY</string>
-    <string name="adUnitId">YOUR_KEY</string>
+    <string name="admob_key">TESTE</string>
+    <string name="adUnitId">TESTE</string>
 
     <string name="privacy">Privacidade</string>
     <string name="privacy_policy">Política de Privacidade</string>

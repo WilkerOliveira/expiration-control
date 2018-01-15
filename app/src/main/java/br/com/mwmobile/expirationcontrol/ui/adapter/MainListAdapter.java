@@ -65,7 +65,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Recycl
         if (holder.value != null)
             holder.value.setText(NumberUtil.currencyToString(product.getValue()));
 
-        if (holder.amount != null)
+        if (holder.amount != null && product.getValue() != null)
             holder.amount.setText(NumberUtil.currencyToString(product.getValue().multiply(product.getQuantity())));
 
         holder.itemView.setTag(product.getId());
