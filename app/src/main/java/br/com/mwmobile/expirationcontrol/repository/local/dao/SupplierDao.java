@@ -5,13 +5,12 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
 import io.reactivex.Single;
-
-import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 /**
  * Supplier DAO
@@ -35,8 +34,11 @@ public interface SupplierDao {
     @Query("select * from supplier where name = :name")
     List<Supplier> getByName(String name);
 
-    @Insert(onConflict = REPLACE)
-    long insertOrUpdate(Supplier supplier);
+    @Insert
+    long insert(Supplier supplier);
+
+    @Update
+    void update(Supplier supplier);
 
     @Delete
     void delete(List<Supplier> suppliers);

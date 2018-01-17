@@ -26,10 +26,10 @@ public class PreferencesManager {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (preferences != null) {
             String days = preferences.getString(context.getString(R.string.expiration_days_alert), context.getString(R.string.default_expiration_days));
-            if(Integer.parseInt(days) <= 0)
+            if (Integer.parseInt(days) <= 0)
                 days = context.getString(R.string.default_expiration_days);
 
-            return  days;
+            return days;
 
         }
         return "";

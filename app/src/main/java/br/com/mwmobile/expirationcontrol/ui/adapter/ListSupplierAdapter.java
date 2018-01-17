@@ -67,7 +67,7 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
         });
 
         holder.imgLetter.setOnClickListener(view -> {
-            ImageUtil.setLetter(holder.imgLetter, supplier.getName());
+            ImageUtil.setLetter(holder.imgLetter, supplier.getName().toUpperCase());
             listener.onRemoveItemClick(supplier);
         });
 

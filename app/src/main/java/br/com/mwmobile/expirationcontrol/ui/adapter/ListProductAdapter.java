@@ -47,14 +47,16 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
      * @param listener        Event listener
      * @param fullList        Show or not the full designer
      * @param expirationDays  Expiration Day
+     * @param tooltipAdded    Add or not Tooltip
      */
-    public ListProductAdapter(Context context, List<Product> productList, int sectionPosition, OnProductListener listener, boolean fullList, int expirationDays) {
+    public ListProductAdapter(Context context, List<Product> productList, int sectionPosition, OnProductListener listener, boolean fullList, int expirationDays, boolean tooltipAdded) {
         this.productList = productList;
         this.listener = listener;
         this.fullList = fullList;
         this.sectionPosition = sectionPosition;
         this.expirationDays = expirationDays;
         this.context = context;
+        this.tooltip = tooltipAdded;
 
     }
 
@@ -100,7 +102,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
         if (holder.imgLetter != null) {
 
-            ImageUtil.setLetter(holder.imgLetter, product.getName());
+            ImageUtil.setLetter(holder.imgLetter, product.getName().toUpperCase());
 
             holder.imgLetter.setOnLongClickListener(view -> {
                 holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);

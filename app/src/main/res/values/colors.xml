@@ -6,4 +6,7 @@
     <color name="normal_expiration">#1d8734</color>
     <color name="warning_expiration">#c1be29</color>
     <color name="expired">#be1019</color>
+
+    <color name="section_background">#009688</color>
+
 </resources>

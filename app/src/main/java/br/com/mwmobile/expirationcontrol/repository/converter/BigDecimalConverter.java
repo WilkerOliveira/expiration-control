@@ -16,7 +16,7 @@ public class BigDecimalConverter {
 
     @TypeConverter
     public static BigDecimal toBigDecimal(String value) {
-        if(value != null && !TextUtils.isEmpty(value)) return new BigDecimal(value);
+        if (value != null && !TextUtils.isEmpty(value)) return new BigDecimal(value);
         return null;
     }
 

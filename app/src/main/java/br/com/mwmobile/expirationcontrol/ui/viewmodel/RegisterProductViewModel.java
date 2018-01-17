@@ -41,7 +41,10 @@ public class RegisterProductViewModel extends ViewModel implements ProductCompon
             //validation of start and end date
             DateUtil.validateDate(product.getExpiration());
 
-            productRepository.insertOrUpdate(product);
+            if (product.getId() > 0)
+                productRepository.update(product);
+            else
+                product.setId(productRepository.insert(product));
         });
     }
 

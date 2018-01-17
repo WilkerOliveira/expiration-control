@@ -34,6 +34,7 @@ public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolde
     private final Context context;
     private final RecyclerViewType recyclerViewType;
     private final ArrayList<SectionModel> sectionModelArrayList;
+    private boolean tooltipAdded;
 
     /**
      * Constructor
@@ -88,7 +89,8 @@ public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolde
         }
 
         ListProductAdapter adapter = new ListProductAdapter(context, sectionModel.getProductList(), position, listener,
-                true, Integer.parseInt(PreferencesManager.getExpirationDays(context)));
+                true, Integer.parseInt(PreferencesManager.getExpirationDays(context)), tooltipAdded);
+        tooltipAdded = true;
         holder.itemRecyclerView.setAdapter(adapter);
 
     }

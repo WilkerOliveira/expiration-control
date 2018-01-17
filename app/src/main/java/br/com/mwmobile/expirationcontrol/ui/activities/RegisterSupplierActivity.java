@@ -43,7 +43,6 @@ import static br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecorati
  */
 public class RegisterSupplierActivity extends LifecycleAppCompatActivity implements OnItemClickListener, OnProductListener {
 
-    private final int ADD_PRODUCT = 1;
     private RegisterSupplierViewModel supplierViewModel;
     private ListProductViewModel productViewModel;
     private Supplier selectedSupplier;
@@ -92,7 +91,8 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
 
                     Intent intent = new Intent(this, RegisterProductActivity.class);
                     intent.putExtra("supplierId", selectedSupplier.getId());
-                    startActivityForResult(intent, ADD_PRODUCT);
+                    //startActivityForResult(intent, ADD_PRODUCT);
+                    startActivity(intent);
                 }
         );
 
@@ -135,7 +135,7 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         this.recyclerViewAdapter = new ListProductAdapter(this, new ArrayList<>(), 0, this,
                 false,
-                Integer.parseInt(PreferencesManager.getExpirationDays(this)));
+                Integer.parseInt(PreferencesManager.getExpirationDays(this)), false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -232,7 +232,7 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
 
             if (selectedSupplier == null) selectedSupplier = new Supplier();
 
-            selectedSupplier.setName(inputSupplier.getText().toString());
+            selectedSupplier.setName(inputSupplier.getText().toString().trim());
 
             mDisposable.add(supplierViewModel.insertOrUpdate(selectedSupplier)
                     .subscribeOn(Schedulers.io())
@@ -271,12 +271,4 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == ADD_PRODUCT) {
-            loadProducts();
-        }
-    }
 }

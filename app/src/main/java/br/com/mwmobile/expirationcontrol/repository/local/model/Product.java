@@ -64,7 +64,7 @@ public class Product {
      * @param supplierId Supplier ID
      */
     @Ignore
-    public Product(String name, Date expiration, String barCode,  BigDecimal quantity, long supplierId) {
+    public Product(String name, Date expiration, String barCode, BigDecimal quantity, long supplierId) {
         this.name = name;
         this.expiration = expiration;
         this.barCode = barCode;
@@ -220,6 +220,7 @@ public class Product {
 
     /**
      * Return the Product Value
+     *
      * @return Product Value
      */
     public BigDecimal getValue() {
@@ -228,6 +229,7 @@ public class Product {
 
     /**
      * Set the Product Value
+     *
      * @param value Product Value
      */
     public void setValue(BigDecimal value) {

@@ -69,6 +69,7 @@ public class MainActivity extends LifecycleAppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -92,6 +93,7 @@ public class MainActivity extends LifecycleAppCompatActivity
         mAdView.loadAd(adRequest);
 
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
+        collapsingToolbarLayout.setTitleEnabled(false);
         collapsingToolbarLayout.setTitle(" ");
         AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {

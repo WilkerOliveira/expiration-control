@@ -95,7 +95,6 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Recycl
      */
     static class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        int sectionPosition;
         final View viewExpirationStatus;
         final View itemView;
         private final TextView name;
@@ -103,6 +102,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Recycl
         private final TextView quantity;
         private final TextView value;
         private final TextView amount;
+        int sectionPosition;
 
         RecyclerViewHolder(View view) {
             super(view);

@@ -311,14 +311,14 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
             try {
                 if (selectedProduct == null) selectedProduct = new Product();
 
-                selectedProduct.setName(inputProduct.getText().toString());
+                selectedProduct.setName(inputProduct.getText().toString().trim());
 
                 selectedProduct.setExpiration(DateUtil.parseToDate(txtExpirationDate.getText().toString()));
 
                 selectedProduct.setQuantity(NumberUtil.toCurrencyBigDecimal(inputQuantity.getText().toString()));
                 selectedProduct.setValue(NumberUtil.toCurrencyBigDecimal(inputProductValue.getText().toString()));
                 selectedProduct.setSupplierId(supplierId);
-                selectedProduct.setBarCode(TextUtils.isEmpty(inputBarCode.getText().toString()) ? null : inputBarCode.getText().toString());
+                selectedProduct.setBarCode(TextUtils.isEmpty(inputBarCode.getText().toString()) ? null : inputBarCode.getText().toString().trim());
 
                 mDisposable.add(productViewModel.insertOrUpdate(selectedProduct)
                         .subscribeOn(Schedulers.io())

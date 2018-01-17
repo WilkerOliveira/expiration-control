@@ -39,12 +39,22 @@ public class ProductRepository {
     }
 
     /**
-     * Insert or Update a Product
+     * Insert a Product
+     *
+     * @param product Product data
+     * @return Product ID
+     */
+    public long insert(final Product product) {
+        return productDao.insert(product);
+    }
+
+    /**
+     * Update a Product
      *
      * @param product Product data
      */
-    public void insertOrUpdate(final Product product) {
-        productDao.insertOrUpdate(product);
+    public void update(final Product product) {
+        productDao.update(product);
     }
 
     /**

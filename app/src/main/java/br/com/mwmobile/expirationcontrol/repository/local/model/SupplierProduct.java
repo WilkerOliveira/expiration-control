@@ -48,6 +48,7 @@ public class SupplierProduct {
 
     /**
      * Return the Total of expired product
+     *
      * @return Total
      */
     public int getTotalExpired() {
@@ -56,6 +57,7 @@ public class SupplierProduct {
 
     /**
      * Set the Total of expired product
+     *
      * @param totalExpired Total
      */
     public void setTotalExpired(int totalExpired) {
@@ -64,6 +66,7 @@ public class SupplierProduct {
 
     /**
      * Return the Total of upcoming expiration product
+     *
      * @return Total
      */
     public int getTotalWarning() {
@@ -72,6 +75,7 @@ public class SupplierProduct {
 
     /**
      * Set the Total of upcoming expiration product
+     *
      * @param totalWarning Total
      */
     public void setTotalWarning(int totalWarning) {
@@ -80,6 +84,7 @@ public class SupplierProduct {
 
     /**
      * Return the Total of Valid expiration
+     *
      * @return Total
      */
     public int getTotalValid() {
@@ -88,6 +93,7 @@ public class SupplierProduct {
 
     /**
      * Set the Total of Valid expiration
+     *
      * @param totalValid Total
      */
     public void setTotalValid(int totalValid) {

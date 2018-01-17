@@ -28,7 +28,7 @@ public class RegisterSupplierViewModel extends ViewModel implements SupplierComp
     /// DI
     @Inject
     public SupplierRepository supplierRepository;
-   //***
+    //***
 
     /**
      * Insert or Update a Supplier
@@ -46,7 +46,10 @@ public class RegisterSupplierViewModel extends ViewModel implements SupplierComp
             if (oldSupplier != null && oldSupplier.size() > 0 && oldSupplier.get(0).getId() != newSupplier.getId())
                 throw new CustomError(ErrorType.SUPPLIER_NAME_EXIST.getStringErrorType());
 
-            newSupplier.setId(supplierRepository.insertOrUpdate(newSupplier));
+            if (newSupplier.getId() > 0)
+                supplierRepository.update(newSupplier);
+            else
+                newSupplier.setId(supplierRepository.insert(newSupplier));
         });
     }
 

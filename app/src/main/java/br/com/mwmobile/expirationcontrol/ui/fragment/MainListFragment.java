@@ -128,8 +128,8 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
     /**
      * Create the Sections
      *
-     * @param list List of Suppliers and Products
-     * @param updateTotal      Update or not the Total values
+     * @param list        List of Suppliers and Products
+     * @param updateTotal Update or not the Total values
      */
     private void buildSections(List<SupplierProduct> list, boolean updateTotal) {
         int totalWarning = 0;
@@ -154,7 +154,7 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
                 RecyclerViewType.LINEAR_VERTICAL, this.sectionModelArrayList, (MainActivity) getActivity());
         recyclerView.setAdapter(sectionRecyclerViewAdapter);
 
-        if(updateTotal)
+        if (updateTotal)
             setTotalBar(totalWarning, totalExpired, totalValid);
     }
 

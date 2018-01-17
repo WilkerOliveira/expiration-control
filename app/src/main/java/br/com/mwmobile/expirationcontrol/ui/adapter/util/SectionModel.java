@@ -14,7 +14,7 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 public class SectionModel {
 
     private final String sectionLabel;
-    private final List<Product> productList;
+    private List<Product> productList;
 
     /**
      * Constructor
@@ -44,4 +44,9 @@ public class SectionModel {
     public List<Product> getProductList() {
         return productList;
     }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
 }

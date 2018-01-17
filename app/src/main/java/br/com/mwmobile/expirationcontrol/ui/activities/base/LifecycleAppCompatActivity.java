@@ -203,7 +203,7 @@ public abstract class LifecycleAppCompatActivity extends AppCompatActivity imple
     protected String[] getSupplierList(List<Supplier> supplierList, boolean addAll) {
         List<String> names = new ArrayList<>();
 
-        if(addAll) names.add(getString(R.string.all));
+        if (addAll) names.add(getString(R.string.all));
 
         if (supplierList != null) {
             for (Supplier trip : supplierList) {

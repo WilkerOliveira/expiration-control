@@ -210,7 +210,6 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
             }
 
             this.findViewById(R.id.progressBar).setVisibility(View.GONE);
-
         });
     }
 
@@ -236,8 +235,7 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
         recyclerView.setAdapter(sectionRecyclerViewAdapter);
 
         SummaryVO summaryVO = viewModel.calculateSummary(products, Integer.parseInt(PreferencesManager.getExpirationDays(this)));
-        if(summaryVO != null)
-        {
+        if (summaryVO != null) {
             ((TextView) findViewById(R.id.lblSummaryProducts)).setText(String.format("%s", summaryVO.getTotalProducts()));
             ((TextView) findViewById(R.id.lblSummaryTotal)).setText(NumberUtil.currencyToString(summaryVO.getTotalAmount()));
         }

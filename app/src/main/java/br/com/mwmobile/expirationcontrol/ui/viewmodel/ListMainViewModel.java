@@ -44,7 +44,8 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
      * @param barCode          BarCode
      * @return List of Supplier with Products filtered
      */
-    static List<SupplierProduct> doProductFilter(@NonNull List<SupplierProduct> supplierProducts, int expirationDays, List<ExpirationStatus> expirationStatus, String barCode) {
+    static List<SupplierProduct> doProductFilter(@NonNull List<SupplierProduct> supplierProducts, int expirationDays,
+                                                 List<ExpirationStatus> expirationStatus, String barCode) {
 
         int totalWarning;
         int totalExpired;

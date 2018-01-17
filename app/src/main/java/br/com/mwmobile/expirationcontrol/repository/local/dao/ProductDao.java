@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -14,8 +15,6 @@ import br.com.mwmobile.expirationcontrol.repository.converter.DateConverter;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
-
-import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 /**
  * Product DAO
@@ -46,8 +45,11 @@ public interface ProductDao {
     @Query("select * from Product where id = :id")
     Product getByIdSync(long id);
 
-    @Insert(onConflict = REPLACE)
-    void insertOrUpdate(Product product);
+    @Insert
+    long insert(Product product);
+
+    @Update
+    void update(Product product);
 
     @Delete
     void delete(List<Product> products);

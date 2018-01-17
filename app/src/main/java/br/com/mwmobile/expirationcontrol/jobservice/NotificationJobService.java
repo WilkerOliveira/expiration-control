@@ -47,7 +47,7 @@ public class NotificationJobService extends JobService {
     /**
      * Schedule the Notification Process
      *
-     * @param context  Context
+     * @param context Context
      */
     public static void schedule(Context context) {
         ComponentName component = new ComponentName(context, NotificationJobService.class);

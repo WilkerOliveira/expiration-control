@@ -37,12 +37,21 @@ public class SupplierRepository {
     }
 
     /**
-     * Insert or Update a Supplier
+     * Insert a Supplier
      *
      * @param supplierModel Supplier data
      */
-    public long insertOrUpdate(final Supplier supplierModel) {
-        return supplierDao.insertOrUpdate(supplierModel);
+    public long insert(final Supplier supplierModel) {
+        return supplierDao.insert(supplierModel);
+    }
+
+    /**
+     * Update a Supplier
+     *
+     * @param supplierModel Supplier data
+     */
+    public void update(final Supplier supplierModel) {
+        supplierDao.update(supplierModel);
     }
 
     /**

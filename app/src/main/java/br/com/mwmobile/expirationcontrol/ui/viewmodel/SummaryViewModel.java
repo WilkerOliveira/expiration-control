@@ -88,7 +88,7 @@ public class SummaryViewModel extends ViewModel implements ProductComponent.Inje
         summaryVO.setAmountProductValid(amountProductValid);
         summaryVO.setAmountProductWarning(amountProductWarning);
 
-        summaryVO.setTotalProducts(totalProductExpired + totalProductValid+ totalProductWarning);
+        summaryVO.setTotalProducts(totalProductExpired + totalProductValid + totalProductWarning);
         summaryVO.setTotalAmount(amountProductExpired.add(amountProductValid.add(amountProductWarning)));
 
         return summaryVO;

@@ -70,19 +70,19 @@ public class SummaryVO {
         this.amountProductValid = amountProductValid;
     }
 
-    public void setTotalProducts(int totalProducts) {
-        this.totalProducts = totalProducts;
-    }
-
     public int getTotalProducts() {
         return totalProducts;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setTotalProducts(int totalProducts) {
+        this.totalProducts = totalProducts;
     }
 
     public BigDecimal getTotalAmount() {
         return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }
