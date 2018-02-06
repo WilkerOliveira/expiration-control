@@ -112,7 +112,6 @@ public class ListSupplierActivity extends LifecycleAppCompatActivity implements 
 
             this.findViewById(R.id.progressBar).setVisibility(View.GONE);
         });
-
     }
 
     @Override
