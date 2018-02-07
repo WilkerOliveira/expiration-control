@@ -42,10 +42,11 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
      * @param expirationDays   Expiration Days
      * @param expirationStatus Expiration Status to filter
      * @param barCode          BarCode
+     * @param productName      Product name
      * @return List of Supplier with Products filtered
      */
     static List<SupplierProduct> doProductFilter(@NonNull List<SupplierProduct> supplierProducts, int expirationDays,
-                                                 List<ExpirationStatus> expirationStatus, String barCode) {
+                                                 List<ExpirationStatus> expirationStatus, String barCode, String productName) {
 
         int totalWarning;
         int totalExpired;
@@ -63,7 +64,7 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
 
             for (Product product : supplierProduct.getProducts()) {
 
-                if (product.getExpiration() != null) {
+                if (product.getExpiration() != null && (TextUtils.isEmpty(productName) || product.getName().toUpperCase().contains(productName.toUpperCase()))) {
 
                     if (!TextUtils.isEmpty(barCode) && !barCode.equals(product.getBarCode()))
                         continue;
@@ -132,13 +133,13 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
     private LiveData<List<SupplierProduct>> consultSupplierProducts(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String barCode) {
 
         if (!TextUtils.isEmpty(barCode))
-            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode));
+            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, ""));
 
         if (supplierId > 0) {
-            return Transformations.map(supplierProductRepository.getBySupplierId(supplierId), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode));
+            return Transformations.map(supplierProductRepository.getBySupplierId(supplierId), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, ""));
         } else {
 
-            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode));
+            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, ""));
         }
     }
 

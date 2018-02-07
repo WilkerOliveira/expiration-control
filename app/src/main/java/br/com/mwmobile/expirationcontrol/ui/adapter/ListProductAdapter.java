@@ -14,6 +14,7 @@ import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 import br.com.mwmobile.expirationcontrol.ui.activities.ListProductActivity;
+import br.com.mwmobile.expirationcontrol.util.Constants;
 import br.com.mwmobile.expirationcontrol.util.DateUtil;
 import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
 import br.com.mwmobile.expirationcontrol.util.ImageUtil;
@@ -72,7 +73,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
         DateUtil.setExpirationStatus(this.expirationDays, product);
 
-        holder.name.setText(product.getName());
+        holder.name.setText(Utility.limitText(product.getName(), Constants.TEXT_LIMIT));
 
         holder.expirationDate.setText(DateUtil.parseToString(product.getExpiration()));
 

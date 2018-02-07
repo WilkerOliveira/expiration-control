@@ -41,7 +41,7 @@
             android:layout_marginTop="8dp"
             android:textStyle="bold"
             android:textSize="@dimen/summary_item"
-            android:text="@string/products"
+            android:text="@string/label_products"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblSummary" />
 
@@ -60,23 +60,23 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:text="@string/label_amount"
             android:textSize="@dimen/summary_item"
             android:textStyle="bold"
-            android:text="@string/amount"
-            app:layout_constraintEnd_toStartOf="@+id/lblSummaryTotal"
-            app:layout_constraintTop_toBottomOf="@+id/lblSummary" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/lblSummaryTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/summary_item"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblSummary"
+            android:textSize="@dimen/summary_item"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
             tools:text="0" />
 
 

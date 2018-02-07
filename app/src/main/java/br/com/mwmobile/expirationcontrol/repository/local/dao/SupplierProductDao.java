@@ -29,9 +29,9 @@ public interface SupplierProductDao {
 
     @Query("SELECT s.* FROM supplier s " +
             "INNER JOIN product p ON p.supplierId = s.id " +
-            "WHERE (:id == 0 OR s.id == :id) AND p.name LIKE :name " +
+            "WHERE (:id = 0 OR s.id = :id) " +
             "GROUP BY s.id " +
             "ORDER BY p.expiration ASC")
-    LiveData<List<SupplierProduct>> getBySupplierIdAndProductName(long id, String name);
+    LiveData<List<SupplierProduct>> getBySupplierIdAndProductName(long id);
 
 }

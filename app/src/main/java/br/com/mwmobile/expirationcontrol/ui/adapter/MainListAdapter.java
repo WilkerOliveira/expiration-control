@@ -12,9 +12,11 @@ import java.util.List;
 import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
+import br.com.mwmobile.expirationcontrol.util.Constants;
 import br.com.mwmobile.expirationcontrol.util.DateUtil;
 import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
 import br.com.mwmobile.expirationcontrol.util.NumberUtil;
+import br.com.mwmobile.expirationcontrol.util.Utility;
 
 /**
  * Main List Adapter
@@ -55,7 +57,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Recycl
     public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
         Product product = productList.get(position);
 
-        holder.name.setText(product.getName());
+        holder.name.setText(Utility.limitText(product.getName(), Constants.TEXT_LIMIT));
 
         holder.expirationDate.setText(DateUtil.parseToString(product.getExpiration()));
 

@@ -60,11 +60,10 @@ public class SupplierProductRepository {
      * Get by Supplier Id
      *
      * @param id          Supplier id
-     * @param productName Product name
      * @return List of Products
      */
-    public LiveData<List<SupplierProduct>> getBySupplierIdAndProductName(long id, String productName) {
-        return supplierProductDao.getBySupplierIdAndProductName(id, productName);
+    public LiveData<List<SupplierProduct>> getBySupplierIdAndProductName(long id) {
+        return supplierProductDao.getBySupplierIdAndProductName(id);
     }
 
 }

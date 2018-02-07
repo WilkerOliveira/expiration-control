@@ -1,6 +1,7 @@
 package br.com.mwmobile.expirationcontrol.util;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 
 import it.sephiroth.android.library.tooltip.Tooltip;
@@ -39,5 +40,20 @@ public class Utility {
                         .floatingAnimation(Tooltip.AnimationBuilder.DEFAULT)
                         .build()
         ).show();
+    }
+
+    /**
+     * Limit the Text
+     *
+     * @param text  Text to limite
+     * @param limit Total limit
+     * @return Text limited
+     */
+    public static String limitText(String text, int limit) {
+        if (!TextUtils.isEmpty(text) && text.length() > limit) {
+            return text.substring(0, limit) + "...";
+        }
+
+        return text;
     }
 }

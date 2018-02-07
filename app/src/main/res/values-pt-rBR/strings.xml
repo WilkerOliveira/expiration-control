@@ -105,7 +105,7 @@
     <string name="amount">Valor Total</string>
     <string name="amt">Vl. Tot.</string>
     <string name="summary">Resumo</string>
-    <string name="tooltip_remove_helper">Pressione para selecionar!</string>
+    <string name="tooltip_remove_helper">Pressione para excluir!</string>
     <string name="label_value">Vlr.:</string>
     <string name="label_amt">Vl. Tot.:</string>
     <string name="label_qty">Qtd.:</string>

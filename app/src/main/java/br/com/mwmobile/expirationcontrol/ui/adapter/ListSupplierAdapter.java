@@ -13,6 +13,7 @@ import java.util.List;
 import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnSupplierListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
+import br.com.mwmobile.expirationcontrol.util.Constants;
 import br.com.mwmobile.expirationcontrol.util.ImageUtil;
 import br.com.mwmobile.expirationcontrol.util.Utility;
 import it.sephiroth.android.library.tooltip.Tooltip;
@@ -54,7 +55,8 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
         Supplier supplier = supplierList.get(position);
-        holder.txtName.setText(supplier.getName());
+
+        holder.txtName.setText(Utility.limitText(supplier.getName(), Constants.TEXT_LIMIT));
 
         holder.itemView.setTag(supplier.getId());
 

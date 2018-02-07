@@ -23,4 +23,9 @@ public class Constants {
      */
     public static final int TOTAL_EXPIRATION_STATUS = 3;
 
+    /**
+     * Text limit
+     */
+    public static final  int TEXT_LIMIT = 100;
+
 }

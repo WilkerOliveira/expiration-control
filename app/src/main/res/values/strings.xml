@@ -104,7 +104,7 @@
     <string name="amount">Amount</string>
     <string name="amt">Amt.</string>
     <string name="summary">Summary</string>
-    <string name="tooltip_remove_helper">Long press to select!</string>
+    <string name="tooltip_remove_helper">Long press to delete!</string>
     <string name="label_value">Vlr.:</string>
     <string name="label_amt">Amt.:</string>
     <string name="label_qty">Qty.:</string>

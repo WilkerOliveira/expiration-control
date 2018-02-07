@@ -53,6 +53,7 @@ public class NotificationJobService extends JobService {
         ComponentName component = new ComponentName(context, NotificationJobService.class);
         JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, component)
                 .setPeriodic(INTERVAL * ONE_DAY_INTERVAL);
+        builder.setPersisted(true);
 
         JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (jobScheduler != null) {

@@ -64,9 +64,9 @@ public class ListProductViewModel extends ViewModel implements ProductComponent.
      */
     public LiveData<List<SupplierProduct>> getSupplierProduct(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String productName, String barCode) {
         if (!TextUtils.isEmpty(barCode))
-            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> ListMainViewModel.doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode));
+            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> ListMainViewModel.doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, productName));
 
-        return Transformations.map(supplierProductRepository.getBySupplierIdAndProductName(supplierId, "%" + productName + "%"), supplierProducts -> ListMainViewModel.doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode));
+        return Transformations.map(supplierProductRepository.getBySupplierIdAndProductName(supplierId), supplierProducts -> ListMainViewModel.doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, productName));
     }
 
     /**
