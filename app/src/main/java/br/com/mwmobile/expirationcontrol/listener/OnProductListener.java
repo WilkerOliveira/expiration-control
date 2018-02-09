@@ -12,7 +12,7 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 
 public interface OnProductListener extends OnItemClickListener {
 
-    void onLongClick(Product product);
+    void onLongClick(Product product, boolean immediately);
 
     void onClick(Product product);
 

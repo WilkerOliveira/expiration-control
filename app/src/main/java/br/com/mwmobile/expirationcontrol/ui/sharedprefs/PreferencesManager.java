@@ -34,4 +34,15 @@ public class PreferencesManager {
         }
         return "";
     }
+
+    /**
+     * Get the Tip status
+     *
+     * @param context Context
+     * @return Tip status
+     */
+    public static boolean getTipStatus(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences != null && preferences.getBoolean(context.getString(R.string.tooltip_alert_helper), false);
+    }
 }

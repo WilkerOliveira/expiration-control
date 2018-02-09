@@ -30,6 +30,9 @@ import br.com.mwmobile.expirationcontrol.ui.adapter.util.SectionModel;
 import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListMainViewModel;
 import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Main List Fragment
@@ -57,6 +60,14 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
         return new MainListFragment();
     }
 
+    // this method is only called once for this fragment
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // retain this fragment
+        setRetainInstance(true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,6 +83,11 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
         super.onActivityCreated(savedInstanceState);
 
         loadViewModel();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         loadProducts(null, 0, null, true);
     }
@@ -103,26 +119,41 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
 
         this.view.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
 
-        this.viewModel.getSupplierProduct(Integer.parseInt(expirationDays), expirationStatus, supplierId, barCode).observe(this, list -> {
+        //I had to do this because LiveData was "bugging" my search after deleted a register
+        Observable<List<SupplierProduct>> resultObservable =
+                Observable.fromCallable(() -> viewModel.getSupplierProduct(Integer.parseInt(expirationDays), expirationStatus, supplierId, barCode));
 
-            buildSections(list, updateTotal);
+        resultObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(list -> loadProducts(list, updateTotal));
+    }
 
-            if (list == null || list.isEmpty()) {
+    /**
+     * Load the Products
+     *
+     * @param supplierProducts List to load
+     * @param updateTotal      Update or not the Total values
+     */
+    private void loadProducts(List<SupplierProduct> supplierProducts, boolean updateTotal) {
+
+        buildSections(supplierProducts, updateTotal);
+
+        if (supplierProducts == null || supplierProducts.isEmpty()) {
+            this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.VISIBLE);
+            this.view.findViewById(R.id.imvEmptyList).setVisibility(View.VISIBLE);
+        } else {
+            boolean existProducts = this.sectionModelArrayList != null && !this.sectionModelArrayList.isEmpty();
+
+            if (!existProducts) {
                 this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.VISIBLE);
                 this.view.findViewById(R.id.imvEmptyList).setVisibility(View.VISIBLE);
             } else {
-                boolean existProducts = this.sectionModelArrayList != null && !this.sectionModelArrayList.isEmpty();
-
-                if (!existProducts) {
-                    this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.VISIBLE);
-                    this.view.findViewById(R.id.imvEmptyList).setVisibility(View.VISIBLE);
-                } else {
-                    this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.GONE);
-                    this.view.findViewById(R.id.imvEmptyList).setVisibility(View.GONE);
-                }
+                this.view.findViewById(R.id.txtNoRegisters).setVisibility(View.GONE);
+                this.view.findViewById(R.id.imvEmptyList).setVisibility(View.GONE);
             }
-            this.view.findViewById(R.id.progressBar).setVisibility(View.GONE);
-        });
+        }
+        this.view.findViewById(R.id.progressBar).setVisibility(View.GONE);
     }
 
     /**

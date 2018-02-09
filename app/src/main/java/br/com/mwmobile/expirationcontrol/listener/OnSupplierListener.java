@@ -12,7 +12,7 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
 
 public interface OnSupplierListener extends OnItemClickListener {
 
-    void onLongClick(Supplier supplier);
+    void onLongClick(Supplier supplier, boolean immediately);
 
     void onRemoveItemClick(Supplier supplier);
 }

@@ -1,7 +1,5 @@
 package br.com.mwmobile.expirationcontrol.repository;
 
-import android.arch.lifecycle.LiveData;
-
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.repository.local.dao.SupplierProductDao;
@@ -42,7 +40,7 @@ public class SupplierProductRepository {
      *
      * @return List of Products
      */
-    public LiveData<List<SupplierProduct>> getAll() {
+    public List<SupplierProduct> getAll() {
         return supplierProductDao.getAll();
     }
 
@@ -52,7 +50,7 @@ public class SupplierProductRepository {
      * @param id Supplier id
      * @return List of Products
      */
-    public LiveData<List<SupplierProduct>> getBySupplierId(long id) {
+    public List<SupplierProduct> getBySupplierId(long id) {
         return supplierProductDao.getBySupplierId(id);
     }
 
@@ -62,7 +60,7 @@ public class SupplierProductRepository {
      * @param id          Supplier id
      * @return List of Products
      */
-    public LiveData<List<SupplierProduct>> getBySupplierIdAndProductName(long id) {
+    public List<SupplierProduct> getBySupplierIdAndProductName(long id) {
         return supplierProductDao.getBySupplierIdAndProductName(id);
     }
 

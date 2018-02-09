@@ -16,4 +16,10 @@
         android:summary="@string/summary_expiration_notification_alert"
         android:title="@string/title_expiration_notification_alert" />
 
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/tooltip_alert_helper"
+        android:summary="@string/summary_tooltip_alert_helper"
+        android:title="@string/title_tooltip_alert_helper" />
+
 </PreferenceScreen>

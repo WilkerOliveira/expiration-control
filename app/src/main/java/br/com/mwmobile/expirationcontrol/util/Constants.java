@@ -26,6 +26,11 @@ public class Constants {
     /**
      * Text limit
      */
-    public static final  int TEXT_LIMIT = 100;
+    public static final int TEXT_LIMIT = 100;
+
+    /**
+     * Section Text Limite
+     */
+    public static final int SECTION_TEXT_LIMIT = 65;
 
 }

@@ -1,4 +1,4 @@
-package br.com.mwmobile.expirationcontrol.ui.adapter.viewModel;
+package br.com.mwmobile.expirationcontrol.ui.adapter.viewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

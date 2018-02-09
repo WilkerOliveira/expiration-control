@@ -129,7 +129,7 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
     }
 
     /**
-     * Load all products per supplier
+     * Load all products
      */
     private void loadProducts() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -226,9 +226,11 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
      * Save the Supplier
      */
     private void save() {
-        if (TextUtils.isEmpty(inputSupplier.getText().toString()))
+        inputSupplier.setError(null);
+        if (TextUtils.isEmpty(inputSupplier.getText().toString())) {
+            inputSupplier.setError(getString(R.string.required_field));
             showWarningMessage(R.string.msg_required_fields);
-        else {
+        } else {
 
             if (selectedSupplier == null) selectedSupplier = new Supplier();
 
@@ -253,7 +255,7 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
     }
 
     @Override
-    public void onLongClick(Product product) {
+    public void onLongClick(Product product, boolean immediately) {
 
     }
 

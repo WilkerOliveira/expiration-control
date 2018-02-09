@@ -85,6 +85,7 @@ public class ListSupplierActivity extends LifecycleAppCompatActivity implements 
     private void loadSuppliers() {
 
         recyclerView = findViewById(R.id.recyclerView);
+
         recyclerView.setAdapter(null);
 
         recyclerViewAdapter = new ListSupplierAdapter(new ArrayList<>(), this, this);
@@ -177,12 +178,15 @@ public class ListSupplierActivity extends LifecycleAppCompatActivity implements 
     }
 
     @Override
-    public void onLongClick(Supplier supplier) {
+    public void onLongClick(Supplier supplier, boolean immediately) {
         //check if the product isn't in the remove list
         if (!this.listToRemove.contains(supplier)) this.listToRemove.add(supplier);
 
-        //update de menu
-        if (this.listToRemove.size() > 0) invalidateOptionsMenu();
+        if (immediately) {
+            delete();
+        } else if (this.listToRemove.size() > 0) {
+            invalidateOptionsMenu();
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package br.com.mwmobile.expirationcontrol.ui.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
-import br.com.mwmobile.expirationcontrol.ui.activities.ListProductActivity;
+import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.util.Constants;
 import br.com.mwmobile.expirationcontrol.util.DateUtil;
 import br.com.mwmobile.expirationcontrol.util.ExpirationStatus;
@@ -37,6 +39,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
     private final OnProductListener listener;
     private final boolean fullList;
     private List<Product> productList;
+    private List<Product> productListToDelete = new ArrayList<>();
     private boolean tooltip;
 
     /**
@@ -105,31 +108,62 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
             ImageUtil.setLetter(holder.imgLetter, product.getName().toUpperCase());
 
-            holder.imgLetter.setOnLongClickListener(view -> {
-                holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);
-                listener.onLongClick(product);
-                return true;
-            });
-
             holder.imgLetter.setOnClickListener(view -> {
-                ImageUtil.setLetter(holder.imgLetter, product.getName());
-                listener.onRemoveItemClick(product);
+
+                if (this.productListToDelete.contains(product)) {
+                    this.productListToDelete.remove(product);
+                    ImageUtil.setLetter(holder.imgLetter, product.getName().toUpperCase());
+                    listener.onRemoveItemClick(product);
+                } else if (this.productListToDelete.size() > 0) {
+                    this.productListToDelete.add(product);
+                    holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);
+                    listener.onLongClick(product, false);
+                } else {
+                    ImageUtil.setLetter(holder.imgLetter, product.getName().toUpperCase());
+                    listener.onRemoveItemClick(product);
+                }
+
             });
 
-            if (!fullList) holder.imgLetter.setVisibility(View.GONE);
+            if (!fullList) {
+                holder.imgLetter.setVisibility(View.GONE);
+                holder.imgContextMenu.setVisibility(View.GONE);
+            }else {
+
+                holder.imgContextMenu.setOnClickListener(view -> {
+
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, holder.imgContextMenu);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.edit_delete);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(item -> {
+                        switch (item.getItemId()) {
+                            case R.id.edit_menu:
+                                listener.onClick(product);
+                                break;
+                            case R.id.delete_menu:
+                                listener.onLongClick(product, true);
+                                break;
+                        }
+                        return false;
+                    });
+                    //displaying the popup
+                    popup.show();
+
+                });
+            }
         }
 
         holder.itemView.setOnClickListener(view -> listener.onClick(product));
 
-        if (!tooltip) {
-            if (context instanceof ListProductActivity) {
-                Utility.showTooltipHelper(this.context, holder.imgLetter, this.context.getString(R.string.tooltip_remove_helper), Tooltip.Gravity.BOTTOM);
-            }
-
+        if (!tooltip && PreferencesManager.getTipStatus(context)) {
             this.tooltip = true;
 
             Utility.showTooltipHelper(this.context, holder.itemView, this.context.getString(R.string.tooltip_edit), Tooltip.Gravity.RIGHT);
         }
+
+
     }
 
     @Override
@@ -159,6 +193,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
         private final TextView value;
         private final TextView amount;
         int sectionPosition;
+        final ImageView imgContextMenu;
 
         RecyclerViewHolder(View view) {
             super(view);
@@ -169,6 +204,8 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
             value = view.findViewById(R.id.lblVlr);
             amount = view.findViewById(R.id.lblAmount);
             imgLetter = view.findViewById(R.id.imgLetter);
+
+            imgContextMenu = view.findViewById(R.id.imgContextMenu);
         }
     }
 }

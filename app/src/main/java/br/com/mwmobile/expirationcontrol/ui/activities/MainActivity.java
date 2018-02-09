@@ -325,7 +325,7 @@ public class MainActivity extends LifecycleAppCompatActivity
     }
 
     @Override
-    public void onLongClick(Product product) {
+    public void onLongClick(Product product, boolean immediately ) {
 
     }
 

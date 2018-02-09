@@ -2,7 +2,6 @@ package br.com.mwmobile.expirationcontrol.ui.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.LiveDataReactiveStreams;
-import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.text.TextUtils;
 
@@ -62,11 +61,28 @@ public class ListProductViewModel extends ViewModel implements ProductComponent.
      * @param barCode          Product Barcode
      * @return List of Supplier with Products
      */
-    public LiveData<List<SupplierProduct>> getSupplierProduct(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String productName, String barCode) {
-        if (!TextUtils.isEmpty(barCode))
-            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> ListMainViewModel.doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, productName));
+    public List<SupplierProduct> getSupplierProduct(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String productName, String barCode) {
 
-        return Transformations.map(supplierProductRepository.getBySupplierIdAndProductName(supplierId), supplierProducts -> ListMainViewModel.doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, productName));
+        if (!TextUtils.isEmpty(barCode)) {
+
+            List<SupplierProduct> supplierProducts = supplierProductRepository.getAll();
+
+            return ListMainViewModel.doProductFilter(
+                    supplierProducts,
+                    expirationDays,
+                    expirationStatus,
+                    barCode,
+                    productName);
+        }
+
+        List<SupplierProduct> supplierProducts = supplierProductRepository.getBySupplierIdAndProductName(supplierId);
+
+        return ListMainViewModel.doProductFilter(
+                supplierProducts,
+                expirationDays,
+                expirationStatus,
+                barCode,
+                productName);
     }
 
     /**

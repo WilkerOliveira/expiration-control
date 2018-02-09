@@ -42,7 +42,7 @@
     <string name="error_load_product">Desculpe, não foi possível carregar o produto!</string>
     <string name="product_save_success">Produto salvo!</string>
     <string name="show_all">Mostrar Todos</string>
-    <string name="msg_confirm_delete_product">Deseja realmente excluir esses produtos?</string>
+    <string name="msg_confirm_delete_product">Deseja realmente excluir esse produto?</string>
     <string name="msg_confirm_delete_supplier">Deseja realmente excluir esses fornecedores?</string>
     <string name="msg_delete_success">Itens excluídos com sucesso!</string>
 
@@ -58,7 +58,7 @@
     <string name="title_expiration_notification_alert">Notificação</string>
     <string name="default_expiration_days">10</string>
     <string name="barcode">Código de Barras</string>
-    <string name="filter">Filtro</string>
+    <string name="filter">Buscar</string>
     <string name="all">Todos</string>
     <string name="expired">Vencidos</string>
     <string name="valid_period">Válidos</string>
@@ -112,4 +112,10 @@
     <string name="label_products">Produtos:</string>
     <string name="label_amount">Vl. Tot:</string>
     <string name="tooltip_edit">Pressione para editar!</string>
+    <string name="options">Opções</string>
+    <string name="edit">Editar</string>
+    <string name="tooltip_alert_helper">tooltip_alert_helper</string>
+    <string name="summary_tooltip_alert_helper">Habilitar ou Desabilitar a dica de Editar e Excluir!</string>
+    <string name="title_tooltip_alert_helper">Dica</string>
+    <string name="required_field">Esse campo é obrigatório!</string>
 </resources>

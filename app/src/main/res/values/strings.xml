@@ -35,16 +35,16 @@
     <string name="save">SAVE</string>
     <string name="clear">CLEAR</string>
     <string name="msg_required_fields">Required fields not filled!</string>
-    <string name="supplier_save_success">Supplier save!</string>
+    <string name="supplier_save_success">Supplier saved!</string>
     <string name="registers_not_found">Registers not found!</string>
     <string name="delete">Delete</string>
     <string name="suppliers_not_found">Suppliers not found!</string>
     <string name="error_load_product">Sorry, can\'t load product!</string>
     <string name="product_save_success">Product saved!</string>
     <string name="show_all">Show All</string>
-    <string name="msg_confirm_delete_product">Do you really want delete these products?</string>
+    <string name="msg_confirm_delete_product">Do you really want delete this product?</string>
     <string name="msg_confirm_delete_supplier">Do you really want delete these suppliers?</string>
-    <string name="msg_delete_success">Deleted items successfully!</string>
+    <string name="msg_delete_success">Items deleted successfully!</string>
 
     <string name="no_products_registered">No products to list!</string>
 
@@ -85,7 +85,7 @@
                 "<h1 style=\"text-align: center;\">
                 "<u>Privacy Policy</u></h1>
                 "<div>
-                "We are committed to protecting your privacy. For this reason, we do not collect any personal information or this application.</div>
+                "We are committed to protecting your privacy. For this reason, we do not collect any personal information in this application.</div>
                 "<h3>
                 "Using the Camera</h3>
                 "<div>
@@ -111,4 +111,10 @@
     <string name="label_products">Products:</string>
     <string name="label_amount">Amount:</string>
     <string name="tooltip_edit">Press to edit!</string>
+    <string name="options">Options</string>
+    <string name="edit">Edit</string>
+    <string name="tooltip_alert_helper">tooltip_alert_helper</string>
+    <string name="summary_tooltip_alert_helper">Enable or Disable the Edit and Delete tip!</string>
+    <string name="title_tooltip_alert_helper">Tip</string>
+    <string name="required_field">This field is required!</string>
 </resources>

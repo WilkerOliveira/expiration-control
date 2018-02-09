@@ -1,7 +1,5 @@
 package br.com.mwmobile.expirationcontrol.ui.viewmodel;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.text.TextUtils;
 
@@ -117,7 +115,7 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
      * @param barCode          Product barcode
      * @return List of Supplier with Products
      */
-    public LiveData<List<SupplierProduct>> getSupplierProduct(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String barCode) {
+    public List<SupplierProduct> getSupplierProduct(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String barCode) {
         return consultSupplierProducts(expirationDays, expirationStatus, supplierId, barCode);
     }
 
@@ -130,17 +128,20 @@ public class ListMainViewModel extends ViewModel implements ListMainComponent.In
      * @param barCode          Product BarCode
      * @return List of Supplier Product
      */
-    private LiveData<List<SupplierProduct>> consultSupplierProducts(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String barCode) {
+    private List<SupplierProduct> consultSupplierProducts(int expirationDays, List<ExpirationStatus> expirationStatus, long supplierId, String barCode) {
 
-        if (!TextUtils.isEmpty(barCode))
-            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, ""));
+        List<SupplierProduct> supplierProducts;
 
-        if (supplierId > 0) {
-            return Transformations.map(supplierProductRepository.getBySupplierId(supplierId), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, ""));
+       if (supplierId > 0) {
+
+            supplierProducts = supplierProductRepository.getBySupplierId(supplierId);
+
         } else {
 
-            return Transformations.map(supplierProductRepository.getAll(), supplierProducts -> doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, ""));
+            supplierProducts = supplierProductRepository.getAll();
         }
+
+        return doProductFilter(supplierProducts, expirationDays, expirationStatus, barCode, "");
     }
 
     @Override

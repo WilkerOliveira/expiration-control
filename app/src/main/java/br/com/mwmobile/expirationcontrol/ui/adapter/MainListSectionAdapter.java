@@ -14,8 +14,10 @@ import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
 import br.com.mwmobile.expirationcontrol.ui.adapter.util.RecyclerViewType;
 import br.com.mwmobile.expirationcontrol.ui.adapter.util.SectionModel;
-import br.com.mwmobile.expirationcontrol.ui.adapter.viewModel.SectionViewHolder;
+import br.com.mwmobile.expirationcontrol.ui.adapter.viewHolder.SectionViewHolder;
 import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
+import br.com.mwmobile.expirationcontrol.util.Constants;
+import br.com.mwmobile.expirationcontrol.util.Utility;
 
 import static br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration.SHOW_FIRST_DIVIDER;
 import static br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration.SHOW_LAST_DIVIDER;
@@ -59,7 +61,7 @@ public class MainListSectionAdapter extends RecyclerView.Adapter<SectionViewHold
     public void onBindViewHolder(SectionViewHolder holder, int position) {
         final SectionModel sectionModel = sectionModelArrayList.get(position);
 
-        holder.sectionLabel.setText(sectionModel.getSectionLabel());
+        holder.sectionLabel.setText(Utility.limitText(sectionModel.getSectionLabel(), Constants.SECTION_TEXT_LIMIT));
         holder.itemDecoration = new DividerItemDecoration(context, null, SHOW_FIRST_DIVIDER, SHOW_LAST_DIVIDER);
         holder.itemRecyclerView.removeItemDecoration(holder.itemDecoration);
         holder.itemRecyclerView.addItemDecoration(holder.itemDecoration);

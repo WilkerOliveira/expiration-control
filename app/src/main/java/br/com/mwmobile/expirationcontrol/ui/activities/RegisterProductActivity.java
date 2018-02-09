@@ -304,6 +304,15 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
      * Save the Product
      */
     private void save() {
+        inputProduct.setError(null);
+        txtExpirationDate.setError(null);
+
+        if(TextUtils.isEmpty(inputProduct.getText().toString()))
+            inputProduct.setError(getString(R.string.required_field));
+
+        if(TextUtils.isEmpty(txtExpirationDate.getText().toString()))
+            txtExpirationDate.setError(getString(R.string.required_field));
+
         if (TextUtils.isEmpty(inputProduct.getText().toString()) || TextUtils.isEmpty(txtExpirationDate.getText().toString()) ||
                 this.supplierId == 0)
             showWarningMessage(R.string.msg_required_fields);

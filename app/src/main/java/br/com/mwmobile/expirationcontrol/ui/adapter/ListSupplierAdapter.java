@@ -1,6 +1,7 @@
 package br.com.mwmobile.expirationcontrol.ui.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnSupplierListener;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
+import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.util.Constants;
 import br.com.mwmobile.expirationcontrol.util.ImageUtil;
 import br.com.mwmobile.expirationcontrol.util.Utility;
@@ -31,6 +34,7 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
     private final OnSupplierListener listener;
     private final Context context;
     private List<Supplier> supplierList;
+    private List<Supplier> supplierListToRemove = new ArrayList<>();
     private boolean tooltip;
 
     /**
@@ -63,23 +67,63 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
         ImageUtil.setLetter(holder.imgLetter, supplier.getName());
 
         holder.imgLetter.setOnLongClickListener(view -> {
+
+            if (!this.supplierListToRemove.contains(supplier)) {
+                this.supplierListToRemove.add(supplier);
+            }
+
             holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);
-            listener.onLongClick(supplier);
+            listener.onLongClick(supplier,false);
             return true;
         });
 
         holder.imgLetter.setOnClickListener(view -> {
-            ImageUtil.setLetter(holder.imgLetter, supplier.getName().toUpperCase());
-            listener.onRemoveItemClick(supplier);
+
+            if (this.supplierListToRemove.contains(supplier)) {
+                this.supplierListToRemove.remove(supplier);
+                ImageUtil.setLetter(holder.imgLetter, supplier.getName().toUpperCase());
+                listener.onRemoveItemClick(supplier);
+            } else if (this.supplierListToRemove.size() > 0) {
+                this.supplierListToRemove.add(supplier);
+                holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);
+                listener.onLongClick(supplier, false);
+            } else {
+                ImageUtil.setLetter(holder.imgLetter, supplier.getName().toUpperCase());
+                listener.onRemoveItemClick(supplier);
+            }
         });
 
         holder.itemView.setOnClickListener(view -> listener.onClick(position));
-        if (!tooltip) {
+
+        if (!tooltip && PreferencesManager.getTipStatus(context)) {
             Utility.showTooltipHelper(this.context, holder.imgLetter, this.context.getString(R.string.tooltip_remove_helper), Tooltip.Gravity.BOTTOM);
             this.tooltip = true;
 
             Utility.showTooltipHelper(this.context, holder.itemView, this.context.getString(R.string.tooltip_edit), Tooltip.Gravity.RIGHT);
         }
+
+        holder.imgContextMenu.setOnClickListener(view -> {
+
+            //creating a popup menu
+            PopupMenu popup = new PopupMenu(context, holder.imgContextMenu);
+            //inflating menu from xml resource
+            popup.inflate(R.menu.edit_delete);
+            //adding click listener
+            popup.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.edit_menu:
+                        listener.onClick(position);
+                        break;
+                    case R.id.delete_menu:
+                        listener.onLongClick(supplier, true);
+                        break;
+                }
+                return false;
+            });
+            //displaying the popup
+            popup.show();
+
+        });
     }
 
     @Override
@@ -103,6 +147,7 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
 
         final ImageView imgLetter;
         final View itemView;
+        final ImageView imgContextMenu;
         private final TextView txtName;
 
         RecyclerViewHolder(View view) {
@@ -110,6 +155,9 @@ public class ListSupplierAdapter extends RecyclerView.Adapter<ListSupplierAdapte
             itemView = view;
             txtName = view.findViewById(R.id.txtName);
             imgLetter = view.findViewById(R.id.imgLetter);
+            imgContextMenu = view.findViewById(R.id.imgContextMenu);
         }
+
+
     }
 }
