@@ -42,8 +42,11 @@ android {
     }
     flavorDimensions "versionCode"
     productFlavors {
-        pro {
+        free {
 
+        }
+        pro {
+            applicationIdSuffix = ".pro"
         }
         validation {
             applicationIdSuffix = ".validation"
@@ -58,7 +61,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Support libraries
     implementation 'com.android.support:support-v4:' + rootProject.supportLibVersion
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:'+ rootProject.constraintLayoutVersion
     compile 'com.android.support:design:' + rootProject.supportLibVersion
     compile 'com.android.support:cardview-v7:' + rootProject.supportLibVersion
     compile 'com.android.support:recyclerview-v7:' + rootProject.supportLibVersion
@@ -87,10 +90,11 @@ dependencies {
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
     //Dagger2
-    compile 'com.google.dagger:dagger:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     //CircleProgress
-    compile 'com.github.lzyzsd:circleprogress:1.2.1'
+    compile "com.github.lzyzsd:circleprogress:$rootProject.circleprogressVersion"
+
     // Testing-only dependencies
     testImplementation 'junit:junit:4.12'
     // Android Testing Support Library's runner and rules
@@ -98,13 +102,15 @@ dependencies {
     androidTestImplementation "com.android.support.test:rules:$rootProject.runnerVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$rootProject.roomVersion"
     //Mock Dagger 2
-    testCompile 'com.github.fabioCollini.daggermock:daggermock:0.8.2'
-    androidTestCompile 'com.github.fabioCollini.daggermock:daggermock:0.8.2'
+    testCompile "com.github.fabioCollini.daggermock:daggermock:$rootProject.daggerMockVersion"
+    androidTestCompile "com.github.fabioCollini.daggermock:daggermock:$rootProject.daggerMockVersion"
+
     //AdMOB
     compile 'com.google.android.gms:play-services-ads:' + rootProject.androidGSMVersion
     compile 'com.google.android.gms:play-services:' + rootProject.androidGSMVersion
     compile 'com.google.firebase:firebase-core:' + rootProject.androidGSMVersion
     compile 'com.google.firebase:firebase-messaging:' + rootProject.androidGSMVersion
+
     //MULTIDEX
     compile 'com.android.support:multidex:1.0.2'
 }

@@ -45,6 +45,12 @@ ext {
     constraintLayoutVersion = "1.1.0-beta3"
     rxjavaVersion = "2.1.3"
     rxandroidVersion = "2.0.1"
+    constraintLayoutVersion = "1.0.2"
+
+    daggerVersion = "2.11"
+    daggerMockVersion = "0.8.2"
+
+    circleprogressVersion = "1.2.1"
 
     jUnitVersion = "4.12"
     hamcrestLibraryVersion = "1.3"
