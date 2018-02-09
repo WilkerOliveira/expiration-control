@@ -18,7 +18,7 @@
     <string name="products">Products</string>
     <string name="settings">Settings</string>
     <string name="next_expirations">Upcoming</string>
-    <string name="msg_supplier_name_exist">Already exist a Supplier with this name!</string>
+    <string name="msg_supplier_name_exist">A Supplier with this name already exists!</string>
     <string name="msg_invalid_expiration_date">Expiration date is invalid!</string>
     <string name="save_error">Sorry, can\'t save this register!</string>
     <string name="permission_not_granted">Permission not granted.</string>
@@ -42,8 +42,8 @@
     <string name="error_load_product">Sorry, can\'t load product!</string>
     <string name="product_save_success">Product saved!</string>
     <string name="show_all">Show All</string>
-    <string name="msg_confirm_delete_product">Do you really want delete this product?</string>
-    <string name="msg_confirm_delete_supplier">Do you really want delete these suppliers?</string>
+    <string name="msg_confirm_delete_product">Do you really want to delete this product?</string>
+    <string name="msg_confirm_delete_supplier">Do you really want to delete these suppliers?</string>
     <string name="msg_delete_success">Items deleted successfully!</string>
 
     <string name="no_products_registered">No products to list!</string>
@@ -70,7 +70,7 @@
     <string name="title_period_days_alert">Interval to monitoring</string>
     <string name="content_text_notification">Come see. There are some products expiring!</string>
     <string name="content_title_products_expiring">Products expiring</string>
-    <string name="summary_products">A summary of your products will be list here</string>
+    <string name="summary_products">A summary of your products will be listed here</string>
 
     <string name="admob_key">TESTE</string>
     <string name="adUnitId">TESTE</string>
@@ -89,7 +89,7 @@
                 "<h3>
                 "Using the Camera</h3>
                 "<div>
-                "The use of the camera through the application, is related solely and exclusively to capture the bar code of the products.</div>
+                "The use of the camera through the application, is related solely and exclusively to capturing the bar code of the products.</div>
                 "<div>
                 "No other information is used through its use.</div>
                 "<h3>
@@ -99,13 +99,13 @@
                 "</body>
                 "</html>"]]></string>
     <string name="product_value">Product Value</string>
-    <string name="value">Vlr.</string>
+    <string name="value">Val.</string>
     <string name="qty">Qty.</string>
     <string name="amount">Amount</string>
     <string name="amt">Amt.</string>
     <string name="summary">Summary</string>
     <string name="tooltip_remove_helper">Long press to delete!</string>
-    <string name="label_value">Vlr.:</string>
+    <string name="label_value">Val.:</string>
     <string name="label_amt">Amt.:</string>
     <string name="label_qty">Qty.:</string>
     <string name="label_products">Products:</string>
