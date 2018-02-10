@@ -42,11 +42,8 @@ android {
     }
     flavorDimensions "versionCode"
     productFlavors {
-        free {
-
-        }
         pro {
-            applicationIdSuffix = ".pro"
+
         }
         validation {
             applicationIdSuffix = ".validation"
