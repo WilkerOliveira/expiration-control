@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -222,7 +223,8 @@ public abstract class LifecycleAppCompatActivity extends AppCompatActivity imple
      */
     protected void startScan(List<ExpirationStatus> expirationStatus, long supplierId) {
 
-        MaterialBarcodeScannerBuilder builder = BarcodeScanner.newBuilderInstance(getString(R.string.searching), this);
+        MaterialBarcodeScannerBuilder builder = BarcodeScanner.newBuilderInstance(getString(R.string.searching), this)
+                .withBarcodeFormats(Barcode.ALL_FORMATS);
 
         builder.withResultListener(barcode -> {
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);

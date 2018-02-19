@@ -18,7 +18,7 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
  * @since 24/09/2017
  */
 
-@Database(entities = {Supplier.class, Product.class}, version = 3)
+@Database(entities = {Supplier.class, Product.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**
@@ -45,6 +45,18 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    /**
+     * Migration to add a cursor return
+     *
+     * @since 16/02/2018
+     */
+    private static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+
+        }
+    };
+
     private static AppDatabase INSTANCE;
 
     /**
@@ -59,6 +71,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "expControl_db")
                             .addMigrations(MIGRATION_1_2) //ADD MIGRATION TO VERSION 2
                             .addMigrations(MIGRATION_2_3) //ADD MIGRATION TO VERSION 3
+                            .addMigrations(MIGRATION_3_4) //ADD MIGRATION TO VERSION 4
                             .build();
         }
         return INSTANCE;

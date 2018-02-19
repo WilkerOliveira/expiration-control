@@ -117,4 +117,7 @@
     <string name="summary_tooltip_alert_helper">Enable or Disable the Edit and Delete tip!</string>
     <string name="title_tooltip_alert_helper">Tip</string>
     <string name="required_field">This field is required!</string>
+    <string name="notification">Notification</string>
+    <string name="msg_delete_single_success">Item deleted successfully!</string>
+    <string name="delete_menu">DELETE</string>
 </resources>

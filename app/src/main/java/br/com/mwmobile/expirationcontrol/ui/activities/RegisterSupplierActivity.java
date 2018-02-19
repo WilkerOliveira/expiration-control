@@ -25,6 +25,8 @@ import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
 import br.com.mwmobile.expirationcontrol.ui.activities.base.LifecycleAppCompatActivity;
 import br.com.mwmobile.expirationcontrol.ui.adapter.ListProductAdapter;
 import br.com.mwmobile.expirationcontrol.ui.decorator.DividerItemDecoration;
+import br.com.mwmobile.expirationcontrol.ui.dialog.AlertDialog;
+import br.com.mwmobile.expirationcontrol.ui.dialog.DialogType;
 import br.com.mwmobile.expirationcontrol.ui.sharedprefs.PreferencesManager;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListProductViewModel;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.RegisterSupplierViewModel;
@@ -200,6 +202,9 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
             case R.id.save_menu:
                 save();
                 return true;
+            case R.id.delete:
+                delete();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -271,6 +276,35 @@ public class RegisterSupplierActivity extends LifecycleAppCompatActivity impleme
     @Override
     public void onRemoveItemClick(Product product) {
 
+    }
+
+    /**
+     * Perform the action of delete
+     */
+    private void delete() {
+        if(this.selectedSupplier != null && this.selectedSupplier.getId() > 0) {
+            //confirm if the user really wants delete the product
+            final AlertDialog alert = new AlertDialog();
+
+            alert.setAlertType(DialogType.YES_NO);
+            alert.setMessage(getString(R.string.msg_confirm_delete_supplier));
+
+            alert.setFirstButtonEvent((dialogInterface, i) -> mDisposable.add(supplierViewModel.delete(this.selectedSupplier)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onDeleteCompleted,
+                            throwable -> showWarningOrErrorMessage(getSaveError(throwable), throwable))));
+
+            alert.show(getSupportFragmentManager(), "dialog");
+        }
+    }
+
+    /**
+     * On Delete completed
+     */
+    public void onDeleteCompleted() {
+        showSuccessMessage(R.string.msg_delete_single_success);
+        cleanForm();
     }
 
 }

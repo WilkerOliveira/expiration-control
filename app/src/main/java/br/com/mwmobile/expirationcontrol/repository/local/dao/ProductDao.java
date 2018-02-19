@@ -7,6 +7,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
 import android.arch.persistence.room.Update;
+import android.database.Cursor;
 
 import java.util.List;
 
@@ -31,6 +32,9 @@ public interface ProductDao {
     LiveData<List<Product>> getAll();
 
     @Query("select * from Product order by supplierId")
+    Cursor getAllCursor();
+
+    @Query("select * from Product order by supplierId")
     List<Product> getProductJob();
 
     @Query("select * from Product where supplierId = :supplierId")
@@ -53,5 +57,8 @@ public interface ProductDao {
 
     @Delete
     void delete(List<Product> products);
+
+    @Delete
+    void delete(Product product);
 
 }

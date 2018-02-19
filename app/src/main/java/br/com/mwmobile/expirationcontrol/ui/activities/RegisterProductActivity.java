@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -26,6 +27,8 @@ import br.com.mwmobile.expirationcontrol.helper.MoneyTextWatcher;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 import br.com.mwmobile.expirationcontrol.repository.local.model.Supplier;
 import br.com.mwmobile.expirationcontrol.ui.activities.base.LifecycleAppCompatActivity;
+import br.com.mwmobile.expirationcontrol.ui.dialog.AlertDialog;
+import br.com.mwmobile.expirationcontrol.ui.dialog.DialogType;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.ListSupplierViewModel;
 import br.com.mwmobile.expirationcontrol.ui.viewmodel.RegisterProductViewModel;
 import br.com.mwmobile.expirationcontrol.util.BarcodeScanner;
@@ -274,6 +277,9 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
             case R.id.save_menu:
                 save();
                 return true;
+            case R.id.delete:
+                delete();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -307,10 +313,10 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
         inputProduct.setError(null);
         txtExpirationDate.setError(null);
 
-        if(TextUtils.isEmpty(inputProduct.getText().toString()))
+        if (TextUtils.isEmpty(inputProduct.getText().toString()))
             inputProduct.setError(getString(R.string.required_field));
 
-        if(TextUtils.isEmpty(txtExpirationDate.getText().toString()))
+        if (TextUtils.isEmpty(txtExpirationDate.getText().toString()))
             txtExpirationDate.setError(getString(R.string.required_field));
 
         if (TextUtils.isEmpty(inputProduct.getText().toString()) || TextUtils.isEmpty(txtExpirationDate.getText().toString()) ||
@@ -353,8 +359,39 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
      * Start the BarCode Scan
      */
     private void startScan() {
-        MaterialBarcodeScannerBuilder builder = BarcodeScanner.newBuilderInstance(getString(R.string.searching), this);
+        MaterialBarcodeScannerBuilder builder = BarcodeScanner.newBuilderInstance(getString(R.string.searching), this)
+                .withBarcodeFormats(Barcode.ALL_FORMATS);
 
         builder.withResultListener(barcode -> inputBarCode.setText(barcode.rawValue)).build().startScan();
     }
+
+    /**
+     * Perform the action of delete
+     */
+    private void delete() {
+        if(this.selectedProduct != null && this.selectedProduct.getId() > 0) {
+            //confirm if the user really wants delete the product
+            final AlertDialog alert = new AlertDialog();
+
+            alert.setAlertType(DialogType.YES_NO);
+            alert.setMessage(getString(R.string.msg_confirm_delete_product));
+
+            alert.setFirstButtonEvent((dialogInterface, i) -> mDisposable.add(productViewModel.delete(this.selectedProduct)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onDeleteCompleted,
+                            throwable -> showWarningOrErrorMessage(getSaveError(throwable), throwable))));
+
+            alert.show(getSupportFragmentManager(), "dialog");
+        }
+    }
+
+    /**
+     * On Delete completed
+     */
+    public void onDeleteCompleted() {
+        showSuccessMessage(R.string.msg_delete_single_success);
+        cleanForm();
+    }
+
 }

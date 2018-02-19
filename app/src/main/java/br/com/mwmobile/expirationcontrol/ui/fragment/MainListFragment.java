@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
     private ListMainViewModel viewModel;
     private View view;
     private RecyclerView recyclerView;
+    private boolean barcodeSearching;
 
     /**
      * Use this factory method to create a new instance of
@@ -89,7 +91,10 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
     public void onResume() {
         super.onResume();
 
-        loadProducts(null, 0, null, true);
+        if(!barcodeSearching) {
+            loadProducts(null, 0, null, true);
+        }
+        this.barcodeSearching = false;
     }
 
     /**
@@ -109,6 +114,8 @@ public class MainListFragment extends Fragment implements LifecycleRegistryOwner
      * @param updateTotal      Update or not the Total values
      */
     public void loadProducts(@Nullable List<ExpirationStatus> expirationStatus, long supplierId, String barCode, boolean updateTotal) {
+
+        this.barcodeSearching = !TextUtils.isEmpty(barCode);
 
         this.recyclerView = this.view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(null);

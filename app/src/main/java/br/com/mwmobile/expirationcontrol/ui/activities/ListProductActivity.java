@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,7 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
     private int supplierIndex;
     private RetainedFragment dataFragment;
     private List<SupplierProduct> supplierProducts;
+    private boolean barcodeSearching;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +107,7 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
         dataFragment = (RetainedFragment) fm.findFragmentByTag("supplierProductList");
 
         // create the fragment and data the first time
-        if (dataFragment == null || (dataFragment.getSupplierProductList() == null || dataFragment.getSupplierProductList().isEmpty())) {
+        if (!barcodeSearching && (dataFragment == null || (dataFragment.getSupplierProductList() == null || dataFragment.getSupplierProductList().isEmpty()))) {
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "supplierProductList").commit();
@@ -113,10 +115,11 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
             dataFragment.setSupplierProductList(supplierProducts);
 
             loadProducts(null, 0, "", null);
-        } else {
+        } else if(!barcodeSearching) {
             loadProducts(dataFragment.getSupplierProductList());
         }
 
+        this.barcodeSearching = false;
     }
 
     /**
@@ -392,7 +395,10 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
      */
     private void startScan() {
 
-        MaterialBarcodeScannerBuilder builder = BarcodeScanner.newBuilderInstance(getString(R.string.searching), this);
+        this.barcodeSearching = true;
+
+        MaterialBarcodeScannerBuilder builder = BarcodeScanner.newBuilderInstance(getString(R.string.searching), this)
+                .withBarcodeFormats(Barcode.ALL_FORMATS);
 
         builder.withResultListener(barcode -> loadProducts(null, 0, null, barcode.rawValue)).build().startScan();
     }

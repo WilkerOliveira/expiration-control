@@ -104,6 +104,15 @@ public class ProductRepository {
     }
 
     /**
+     * Delete a product
+     *
+     * @param product Product to delete
+     */
+    public void delete(Product product) {
+        productDao.delete(product);
+    }
+
+    /**
      * Get a Product by name
      *
      * @param name Product's name

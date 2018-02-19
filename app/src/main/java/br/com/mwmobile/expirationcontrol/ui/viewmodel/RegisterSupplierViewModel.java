@@ -66,6 +66,17 @@ public class RegisterSupplierViewModel extends ViewModel implements SupplierComp
         return supplierRepository.getById(id);
     }
 
+    /**
+     * Delete a Supplier
+     *
+     * @param supplier Supplier to Delete
+     * @return Completable
+     */
+    public Completable delete(Supplier supplier) {
+
+        return new CompletableFromAction(() -> supplierRepository.delete(supplier));
+    }
+
     @Override
     public void inject(SupplierComponent supplierComponent) {
         supplierComponent.inject(this);

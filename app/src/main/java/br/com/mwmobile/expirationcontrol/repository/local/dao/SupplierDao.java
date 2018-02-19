@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+import android.database.Cursor;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface SupplierDao {
     @Query("select * from supplier")
     LiveData<List<Supplier>> getAll();
 
+    @Query("select * from supplier")
+    Cursor getAllCursor();
+
     @Query("select * from supplier where id = :id")
     Single<Supplier> getById(long id);
 
@@ -42,4 +46,7 @@ public interface SupplierDao {
 
     @Delete
     void delete(List<Supplier> suppliers);
+
+    @Delete
+    void delete(Supplier supplier);
 }

@@ -93,6 +93,15 @@ public class SupplierRepository {
     }
 
     /**
+     * Delete a Supplier
+     *
+     * @param supplier Supplier
+     */
+    public void delete(Supplier supplier) {
+        supplierDao.delete(supplier);
+    }
+
+    /**
      * Get a Supplier
      *
      * @param supplierId Supplier id

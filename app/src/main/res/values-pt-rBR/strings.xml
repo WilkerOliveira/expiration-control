@@ -118,4 +118,7 @@
     <string name="summary_tooltip_alert_helper">Habilitar ou Desabilitar a dica de Editar e Excluir!</string>
     <string name="title_tooltip_alert_helper">Dica</string>
     <string name="required_field">Esse campo é obrigatório!</string>
+    <string name="notification">Notificação</string>
+    <string name="msg_delete_single_success">Item excluído com sucesso!</string>
+    <string name="delete_menu">EXCLUIR</string>
 </resources>

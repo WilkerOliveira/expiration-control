@@ -60,6 +60,17 @@ public class RegisterProductViewModel extends ViewModel implements ProductCompon
         return productRepository.getById(id);
     }
 
+    /**
+     * Delete a Product
+     *
+     * @param product Product to Delete
+     * @return Completable
+     */
+    public Completable delete(Product product) {
+
+        return new CompletableFromAction(() -> productRepository.delete(product));
+    }
+
     @Override
     public void inject(ProductComponent productComponent) {
         productComponent.inject(this);
