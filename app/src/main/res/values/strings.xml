@@ -72,8 +72,8 @@
     <string name="content_title_products_expiring">Products expiring</string>
     <string name="summary_products">A summary of your products will be listed here</string>
 
-    <string name="admob_key">TESTE</string>
-    <string name="adUnitId">TESTE</string>
+    <string name="admob_key">ca-app-pub-9681983966112415~4520012405</string>
+    <string name="adUnitId">ca-app-pub-9681983966112415/4460550078</string>
 
     <string name="privacy">Privacy</string>
     <string name="privacy_policy">Privacy Policy</string>

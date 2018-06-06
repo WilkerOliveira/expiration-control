@@ -8,8 +8,8 @@ android {
         applicationId "br.com.mwmobile.expirationcontrol"
         minSdkVersion 22
         targetSdkVersion 26
-        versionCode 21
-        versionName "2.5.5"
+        versionCode 22
+        versionName "2.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // used by Room, to test migrations

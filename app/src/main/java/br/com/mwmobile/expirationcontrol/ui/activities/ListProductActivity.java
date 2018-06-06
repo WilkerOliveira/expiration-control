@@ -70,6 +70,7 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
     private RetainedFragment dataFragment;
     private List<SupplierProduct> supplierProducts;
     private boolean barcodeSearching;
+    private boolean loadAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +92,11 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             supplierProducts = null;
-            FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().remove(dataFragment).commit();
+            if(dataFragment != null) {
+                FragmentManager fm = getSupportFragmentManager();
+                fm.beginTransaction().remove(dataFragment).commit();
+            }
+            loadAll = true;
             startActivity(new Intent(ListProductActivity.this, RegisterProductActivity.class));
         });
 
@@ -107,13 +111,13 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
         dataFragment = (RetainedFragment) fm.findFragmentByTag("supplierProductList");
 
         // create the fragment and data the first time
-        if (!barcodeSearching && (dataFragment == null || (dataFragment.getSupplierProductList() == null || dataFragment.getSupplierProductList().isEmpty()))) {
+        if (loadAll || (!barcodeSearching && (dataFragment == null || (dataFragment.getSupplierProductList() == null || dataFragment.getSupplierProductList().isEmpty())))) {
             // add the fragment
             dataFragment = new RetainedFragment();
             fm.beginTransaction().add(dataFragment, "supplierProductList").commit();
             // load the data from the web
             dataFragment.setSupplierProductList(supplierProducts);
-
+            loadAll = false;
             loadProducts(null, 0, "", null);
         } else if(!barcodeSearching) {
             loadProducts(dataFragment.getSupplierProductList());
@@ -364,7 +368,7 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
     @Override
     public void onClick(Product product) {
         Intent intent = new Intent(this, RegisterProductActivity.class);
-
+        loadAll = true;
         intent.putExtra("id", product.getId());
 
         startActivity(intent);
