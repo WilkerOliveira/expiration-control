@@ -12,14 +12,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.application.ExpirationControlApplication;
 import br.com.mwmobile.expirationcontrol.di.ViewModelFactory;
@@ -55,12 +58,13 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
     EditText inputProductValue;
     EditText inputBarCode;
     List<Supplier> supplierList;
+    ImageView imvCalendar;
     long supplierId;
 
-    private DatePickerDialog fromDatePickerDialog;
     private ListSupplierViewModel listSupplierViewModel;
     private RegisterProductViewModel productViewModel;
     private Product selectedProduct;
+    private Calendar currentExpirationDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +130,8 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
         txtExpirationDate = findViewById(R.id.txtExpirationDate);
         txtExpirationDate.setInputType(InputType.TYPE_NULL);
 
+        imvCalendar = findViewById(R.id.imvCalendar);
+
         inputQuantity = findViewById(R.id.inputQuantity);
         inputQuantity.addTextChangedListener(new MoneyTextWatcher(inputQuantity));
 
@@ -151,22 +157,27 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
      * Set the DatePicker Dialog
      */
     private void setDatePicker() {
-        txtExpirationDate.setOnClickListener(this);
+        txtExpirationDate.addTextChangedListener(new MaskEditTextChangedListener("##/##/##", txtExpirationDate));
+        imvCalendar.setOnClickListener(this);
 
         txtExpirationDate.setOnFocusChangeListener(this);
 
-        Calendar newCalendar = Calendar.getInstance();
-        fromDatePickerDialog = new DatePickerDialog(this, (view, year, monthOfYear, dayOfMonth) -> {
-            Calendar newDate = Calendar.getInstance();
-            newDate.set(year, monthOfYear, dayOfMonth);
-            txtExpirationDate.setText(DateUtil.parseToString(newDate.getTime()));
-        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        this.currentExpirationDate = Calendar.getInstance();
 
     }
 
     @Override
     public void onFocusChange(View view, boolean focused) {
-        if (focused) fromDatePickerDialog.show();
+        if (!focused && !TextUtils.isEmpty(txtExpirationDate.getText().toString())){
+            try{
+                Date date = DateUtil.parseToDate(txtExpirationDate.getText().toString());
+                this.currentExpirationDate = Calendar.getInstance();
+                this.currentExpirationDate.setTime(date);
+            }
+            catch (Exception ex){
+                txtExpirationDate.setText("");
+            }
+        }
     }
 
     /**
@@ -179,7 +190,23 @@ public class RegisterProductActivity extends LifecycleAppCompatActivity implemen
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View viewClick) {
+        if (!TextUtils.isEmpty(txtExpirationDate.getText().toString())){
+            try{
+                Date date = DateUtil.parseToDate(txtExpirationDate.getText().toString());
+                this.currentExpirationDate = Calendar.getInstance();
+                this.currentExpirationDate.setTime(date);
+            }
+            catch (Exception ex){
+                txtExpirationDate.setText("");
+            }
+        }
+
+        DatePickerDialog fromDatePickerDialog = new DatePickerDialog(this, (view, year, monthOfYear, dayOfMonth) -> {
+            this.currentExpirationDate.set(year, monthOfYear, dayOfMonth);
+            txtExpirationDate.setText(DateUtil.parseToString(currentExpirationDate.getTime()));
+        }, this.currentExpirationDate.get(Calendar.YEAR), this.currentExpirationDate.get(Calendar.MONTH), this.currentExpirationDate.get(Calendar.DAY_OF_MONTH));
+
         fromDatePickerDialog.show();
     }
 

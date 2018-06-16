@@ -32,8 +32,18 @@ public class DateUtil {
     public static String parseToString(Date date) {
         if (date == null) return "";
 
-        return DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault()).format(date);
+        String dateFomated = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault()).format(date);
+
+        //I did this because of PLUGIN mask
+        String[] dates = dateFomated.split("/");
+
+        if(dates[0].length() < 2) dates[0] = "0" + dates[0];
+        if(dates[1].length() < 2) dates[1] = "0" + dates[1];
+        if(dates[2].length() < 2) dates[2] = "0" + dates[2];
+
+        return dates[0] + "/" + dates[1] + "/" + dates[2];
     }
+
 
     /**
      * Validate the date

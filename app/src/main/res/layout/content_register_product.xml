@@ -34,9 +34,8 @@
         android:id="@+id/textInputLayoutExpirationDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayoutQuantity"
+        app:layout_constraintEnd_toStartOf="@+id/imvCalendar"
         app:layout_constraintHorizontal_weight="0"
         app:layout_constraintStart_toStartOf="@+id/txtInputProduct"
         app:layout_constraintTop_toBottomOf="@+id/txtInputProduct">
@@ -45,26 +44,36 @@
             android:id="@+id/txtExpirationDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_calendar"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/expiration_hint"
             android:inputType="date"
+            android:maxLength="11"
             tools:text="@string/fake_date" />
 
     </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/imvCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/expiration"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutExpirationDate"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayoutQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputProduct"
+        app:srcCompat="@drawable/ic_calendar" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayoutQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="0"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayoutExpirationDate"
         app:layout_constraintTop_toBottomOf="@+id/txtInputProduct">
 
         <EditText

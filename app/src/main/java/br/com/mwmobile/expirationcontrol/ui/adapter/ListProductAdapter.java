@@ -3,6 +3,7 @@ package br.com.mwmobile.expirationcontrol.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
     private final OnProductListener listener;
     private final boolean fullList;
     private List<Product> productList;
-    private List<Product> productListToDelete = new ArrayList<>();
+    private List<Product> productListToDelete;
     private boolean tooltip;
 
     /**
@@ -53,7 +54,9 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
      * @param expirationDays  Expiration Day
      * @param tooltipAdded    Add or not Tooltip
      */
-    public ListProductAdapter(Context context, List<Product> productList, int sectionPosition, OnProductListener listener, boolean fullList, int expirationDays, boolean tooltipAdded) {
+    public ListProductAdapter(Context context, List<Product> productList, int sectionPosition, OnProductListener listener,
+                              boolean fullList, int expirationDays, boolean tooltipAdded,
+                              List<Product> productListToDelete) {
         this.productList = productList;
         this.listener = listener;
         this.fullList = fullList;
@@ -61,6 +64,31 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
         this.expirationDays = expirationDays;
         this.context = context;
         this.tooltip = tooltipAdded;
+        this.productListToDelete = productListToDelete;
+
+    }
+
+    /**
+     * Constructor
+     *
+     * @param context         Context
+     * @param productList     List of Products
+     * @param sectionPosition Section Position
+     * @param listener        Event listener
+     * @param fullList        Show or not the full designer
+     * @param expirationDays  Expiration Day
+     * @param tooltipAdded    Add or not Tooltip
+     */
+    public ListProductAdapter(Context context, List<Product> productList, int sectionPosition, OnProductListener listener,
+                              boolean fullList, int expirationDays, boolean tooltipAdded) {
+        this.productList = productList;
+        this.listener = listener;
+        this.fullList = fullList;
+        this.sectionPosition = sectionPosition;
+        this.expirationDays = expirationDays;
+        this.context = context;
+        this.tooltip = tooltipAdded;
+        this.productListToDelete = new ArrayList<>();
 
     }
 
@@ -107,6 +135,17 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
         if (holder.imgLetter != null) {
 
             ImageUtil.setLetter(holder.imgLetter, product.getName().toUpperCase());
+
+            holder.imgLetter.setOnLongClickListener(view -> {
+
+                if (!this.productListToDelete.contains(product)) {
+                    this.productListToDelete.add(product);
+                }
+
+                holder.imgLetter.setImageResource(R.drawable.ic_check_circle_outline);
+                listener.onLongClick(product, false);
+                return true;
+            });
 
             holder.imgLetter.setOnClickListener(view -> {
 

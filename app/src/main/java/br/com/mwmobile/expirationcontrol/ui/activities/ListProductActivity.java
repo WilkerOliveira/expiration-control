@@ -234,10 +234,10 @@ public class ListProductActivity extends LifecycleAppCompatActivity implements O
                 Integer.parseInt(PreferencesManager.getExpirationDays(ListProductActivity.this)),
                 expirationStatus, supplierId, productName, barCode));
 
-        resultObservable
+        this.mDisposable.add(resultObservable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::loadProducts);
+                .subscribe(this::loadProducts));
     }
 
     /**

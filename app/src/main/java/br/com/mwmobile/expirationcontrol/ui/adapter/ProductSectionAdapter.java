@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.mwmobile.expirationcontrol.R;
 import br.com.mwmobile.expirationcontrol.listener.OnProductListener;
+import br.com.mwmobile.expirationcontrol.repository.local.model.Product;
 import br.com.mwmobile.expirationcontrol.ui.adapter.util.RecyclerViewType;
 import br.com.mwmobile.expirationcontrol.ui.adapter.util.SectionModel;
 import br.com.mwmobile.expirationcontrol.ui.adapter.viewHolder.SectionViewHolder;
@@ -37,6 +39,7 @@ public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolde
     private final RecyclerViewType recyclerViewType;
     private final ArrayList<SectionModel> sectionModelArrayList;
     private boolean tooltipAdded;
+    private List<Product> productListToDelete = new ArrayList<>();
 
     /**
      * Constructor
@@ -91,7 +94,7 @@ public class ProductSectionAdapter extends RecyclerView.Adapter<SectionViewHolde
         }
 
         ListProductAdapter adapter = new ListProductAdapter(context, sectionModel.getProductList(), position, listener,
-                true, Integer.parseInt(PreferencesManager.getExpirationDays(context)), tooltipAdded);
+                true, Integer.parseInt(PreferencesManager.getExpirationDays(context)), tooltipAdded, productListToDelete);
         tooltipAdded = true;
         holder.itemRecyclerView.setAdapter(adapter);
 

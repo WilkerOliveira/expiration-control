@@ -72,8 +72,8 @@
     <string name="content_title_products_expiring">Produtos vencendo</string>
     <string name="summary_products">Um resumo dos produtos serão listados aqui</string>
 
-    <string name="admob_key">ca-app-pub-9681983966112415~4520012405</string>
-    <string name="adUnitId">ca-app-pub-9681983966112415/4460550078</string>
+    <string name="admob_key">KEY</string>
+    <string name="adUnitId">KEY</string>
 
     <string name="privacy">Privacidade</string>
     <string name="privacy_policy">Política de Privacidade</string>

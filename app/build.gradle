@@ -106,6 +106,9 @@ dependencies {
     compile 'com.google.firebase:firebase-core:' + rootProject.androidGSMVersion
     compile 'com.google.firebase:firebase-messaging:' + rootProject.androidGSMVersion
 
+
+    implementation 'br.com.jansenfelipe:androidmask:1.0.1'
+
     //MULTIDEX
-    compile 'com.android.support:multidex:1.0.2'
+    compile 'com.android.support:multidex:1.0.3'
 }
